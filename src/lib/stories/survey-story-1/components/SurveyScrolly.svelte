@@ -2,7 +2,7 @@
 	import { ScrollyContent, RenderContent } from '@the-vcsi/scrolly-kit';
 	import type { ContentItem } from '@the-vcsi/scrolly-kit';
 	import Question from './SurveyQuestion.svelte';
-	import type { SurveyField } from '$lib/server/db/schema';
+	import type { SurveyField } from '../data/schema';
 
 	type QuestionItem = {
 		type: 'question';

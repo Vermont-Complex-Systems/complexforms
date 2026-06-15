@@ -1,7 +1,7 @@
 <script lang="ts">
 	import RadioQuestion from './SurveyQuestion.Radio.svelte';
 	import CheckboxQuestion from './SurveyQuestion.Checkbox.svelte';
-	import type { SurveyField } from '$lib/server/db/schema';
+	import type { SurveyField } from '../data/schema';
 
 	let {
 		question,
