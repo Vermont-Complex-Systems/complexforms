@@ -49,11 +49,11 @@
 	<div class="right-section">
 		<HelpPopover side="bottom" align="end" sideOffset={2} iconSize={30} />
 		{#if user}
-			<span class="avatar-button" title={user.name}>
+			<a class="avatar-button" href="{base}/account" title={user.name}>
 				<Avatar.Root class="avatar-root">
 					<Avatar.Fallback class="avatar-fallback">{getUserInitials(user.name)}</Avatar.Fallback>
 				</Avatar.Root>
-			</span>
+			</a>
 		{:else}
 			<a href="{base}/login" class="login-button">Log in</a>
 		{/if}
@@ -150,6 +150,7 @@
 		transition: all 0.2s;
 	}
 
+	.avatar-button:hover,
 	.login-button:hover {
 		background: var(--color-input-bg);
 		transform: scale(1.05);
