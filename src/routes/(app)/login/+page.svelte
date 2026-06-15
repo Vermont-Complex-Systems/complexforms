@@ -14,7 +14,9 @@
 		const { error: err } = await authClient.signIn.email({ email, password });
 		submitting = false;
 		if (err) error = err.message ?? 'Login failed';
-		else goto('/');
+		// invalidateAll re-runs the layout server load so the nav reflects the
+		// new session without a manual refresh.
+		else await goto('/', { invalidateAll: true });
 	}
 </script>
 
