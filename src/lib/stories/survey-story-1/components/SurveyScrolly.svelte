@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Scrolly, RenderContent } from '@the-vcsi/scrolly-kit';
+	import { ScrollyContent, RenderContent } from '@the-vcsi/scrolly-kit';
 	import type { ContentItem } from '@the-vcsi/scrolly-kit';
 	import Question from './SurveyQuestion.svelte';
 	import type { SurveyField } from '$lib/server/db/schema';
@@ -33,28 +33,26 @@
 	let scrollyIndex = $state(0);
 </script>
 
-<div class="scrolly-content survey-scrolly">
-	<Scrolly bind:value={scrollyIndex}>
-		{#each items as item, i (i)}
-			{@const active = scrollyIndex === i}
-			<div class="step" class:active>
-				<div class="step-content">
-					{#if item.type === 'question'}
-						<Question
-							question={item.value.question}
-							name={item.value.name}
-							bind:value={surveyAnswers[item.value.name] as string | string[]}
-							options={item.value.options}
-							multiple={item.value.multiple || false}
-							{userFingerprint}
-							{saveAnswer}
-						/>
-					{:else}
-						<RenderContent items={item} />
-					{/if}
-				</div>
-			</div>
-		{/each}
-	</Scrolly>
-	<div class="spacer"></div>
-</div>
+<!--
+  Reuse scrolly-kit's ScrollyContent for the step layout / spacers / scroll
+  detection, and supply a custom contentRenderer so each step renders an
+  interactive survey question (or prose for non-question items).
+-->
+<ScrollyContent steps={items as ContentItem[]} bind:value={scrollyIndex}>
+	{#snippet contentRenderer(step)}
+		{@const item = step as SurveyItem}
+		{#if item.type === 'question'}
+			<Question
+				question={item.value.question}
+				name={item.value.name}
+				bind:value={surveyAnswers[item.value.name] as string | string[]}
+				options={item.value.options}
+				multiple={item.value.multiple || false}
+				{userFingerprint}
+				{saveAnswer}
+			/>
+		{:else}
+			<RenderContent items={item} />
+		{/if}
+	{/snippet}
+</ScrollyContent>

@@ -95,17 +95,14 @@
 		--vcsi-story-fg: whitesmoke;
 	}
 
-	/* Survey step boxes render light so the question controls (which use dark
-	   text) stay readable against the dark story background. */
-	:global(#dark-data-survey .survey-scrolly .step > *) {
-		padding: 1rem;
-		background: #f5f5f5;
-		color: #333;
-		border-radius: 5px;
-		box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
-		transition: all 500ms ease;
-		text-align: center;
-		max-width: 600px;
-		margin: 0 auto;
+	/* The survey questions use dark text, so override the scrolly-kit step-box
+	   colors (consumed by ScrollyContent) to render light, readable boxes
+	   against the dark story background. Custom properties inherit into
+	   ScrollyContent's step boxes. */
+	#survey {
+		--vcsi-story-step-bg: #ffffff;
+		--vcsi-story-step-fg: #333;
+		--vcsi-story-step-bg-inactive: #ededed;
+		--vcsi-story-step-fg-inactive: #888;
 	}
 </style>
