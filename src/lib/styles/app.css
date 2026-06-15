@@ -1,0 +1,45 @@
+/* Import base styles from scrolly-kit */
+@import '@the-vcsi/scrolly-kit/styles/reset.css';
+@import '@the-vcsi/scrolly-kit/styles/tokens.css';
+@import '@the-vcsi/scrolly-kit/styles/typography.css';
+@import '@the-vcsi/scrolly-kit/styles/layouts.css';
+
+/* Import custom fonts (kept in template) */
+@import './fonts.css';
+
+/* =============================================================================
+   TEMPLATE CUSTOMIZATIONS
+   Uncomment examples below to see the impact.
+
+   Full reference: https://vermont-complex-systems.github.io/vcsi-starter/reference
+   ============================================================================= */
+
+/* --- Try uncommenting these --- */
+
+/* Customize Nav colors */
+/* :root { --vcsi-nav-bg: #154734; --vcsi-nav-fg: white; } */
+
+/* Add padding to .page containers */
+/* :root { --vcsi-page-inline-padding: 8%; } */
+
+/* Change heading colors */
+/* h1, h2, h3 { color: #154734; } */
+
+/* Increase body text size */
+/* :root { --vcsi-font-size-base: 1.35rem; } */
+
+/* Widen the prose column in stories */
+/* :root { --vcsi-content-max-width: 720px; } */
+
+/* Change the page background */
+/* :root { --vcsi-bg-light: #fff; } */
+
+/* Make links stand out */
+/* a { color: #0066cc; text-decoration: underline; } */
+
+/* Customize split-layout */
+
+/* .split-layout {
+  --vcsi-panel-width: 20%;
+} */
+

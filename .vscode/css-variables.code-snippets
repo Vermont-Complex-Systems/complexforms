@@ -1,0 +1,773 @@
+{
+  // =============================================================================
+  // VCSI BASE TOKENS - Core palette
+  // =============================================================================
+  "--vcsi-color-black": {
+    "prefix": "--vcsi-color-black",
+    "body": "--vcsi-color-black: ${1:#000};",
+    "description": "Pure black"
+  },
+  "--vcsi-color-white": {
+    "prefix": "--vcsi-color-white",
+    "body": "--vcsi-color-white: ${1:whitesmoke};",
+    "description": "Off-white"
+  },
+  "--vcsi-color-beige": {
+    "prefix": "--vcsi-color-beige",
+    "body": "--vcsi-color-beige: ${1:#f4efea};",
+    "description": "Warm beige background"
+  },
+  "--vcsi-color-accent": {
+    "prefix": "--vcsi-color-accent",
+    "body": "--vcsi-color-accent: ${1:#154734};",
+    "description": "Brand accent color (UVM Green)"
+  },
+  "--vcsi-color-uvm-green": {
+    "prefix": "--vcsi-color-uvm-green",
+    "body": "--vcsi-color-uvm-green: ${1:#154734};",
+    "description": "UVM Green"
+  },
+  "--vcsi-color-uvm-gold": {
+    "prefix": "--vcsi-color-uvm-gold",
+    "body": "--vcsi-color-uvm-gold: ${1:rgb(255, 209, 0)};",
+    "description": "UVM Gold"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Gray scale
+  // =============================================================================
+  "--vcsi-gray-100": {
+    "prefix": "--vcsi-gray-100",
+    "body": "--vcsi-gray-100: ${1:rgb(239, 239, 239)};",
+    "description": "Lightest gray"
+  },
+  "--vcsi-gray-200": {
+    "prefix": "--vcsi-gray-200",
+    "body": "--vcsi-gray-200: ${1:rgb(223, 223, 223)};",
+    "description": "Very light gray"
+  },
+  "--vcsi-gray-300": {
+    "prefix": "--vcsi-gray-300",
+    "body": "--vcsi-gray-300: ${1:rgb(202, 202, 202)};",
+    "description": "Light gray"
+  },
+  "--vcsi-gray-400": {
+    "prefix": "--vcsi-gray-400",
+    "body": "--vcsi-gray-400: ${1:rgb(168, 168, 168)};",
+    "description": "Medium-light gray"
+  },
+  "--vcsi-gray-600": {
+    "prefix": "--vcsi-gray-600",
+    "body": "--vcsi-gray-600: ${1:rgb(109, 109, 109)};",
+    "description": "Medium gray"
+  },
+  "--vcsi-gray-700": {
+    "prefix": "--vcsi-gray-700",
+    "body": "--vcsi-gray-700: ${1:rgb(78, 78, 78)};",
+    "description": "Medium-dark gray"
+  },
+  "--vcsi-gray-800": {
+    "prefix": "--vcsi-gray-800",
+    "body": "--vcsi-gray-800: ${1:rgb(55, 55, 55)};",
+    "description": "Dark gray"
+  },
+  "--vcsi-gray-900": {
+    "prefix": "--vcsi-gray-900",
+    "body": "--vcsi-gray-900: ${1:rgb(38, 38, 38)};",
+    "description": "Darkest gray"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Typography stacks
+  // =============================================================================
+  "--vcsi-font-sans": {
+    "prefix": "--vcsi-font-sans",
+    "body": "--vcsi-font-sans: ${1:\"Atlas Grotesk\", system-ui, sans-serif};",
+    "description": "Sans-serif font stack"
+  },
+  "--vcsi-font-serif": {
+    "prefix": "--vcsi-font-serif",
+    "body": "--vcsi-font-serif: ${1:\"Baskerville\", Georgia, serif};",
+    "description": "Serif font stack"
+  },
+  "--vcsi-font-mono": {
+    "prefix": "--vcsi-font-mono",
+    "body": "--vcsi-font-mono: ${1:\"Atlas Typewriter\", \"SF Mono\", monospace};",
+    "description": "Monospace font stack"
+  },
+  "--vcsi-font-heading": {
+    "prefix": "--vcsi-font-heading",
+    "body": "--vcsi-font-heading: ${1:var(--vcsi-font-serif)};",
+    "description": "Heading font (alias)"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Font weights
+  // =============================================================================
+  "--vcsi-font-weight-light": {
+    "prefix": "--vcsi-font-weight-light",
+    "body": "--vcsi-font-weight-light: ${1:300};",
+    "description": "Light font weight"
+  },
+  "--vcsi-font-weight-regular": {
+    "prefix": "--vcsi-font-weight-regular",
+    "body": "--vcsi-font-weight-regular: ${1:400};",
+    "description": "Regular font weight"
+  },
+  "--vcsi-font-weight-medium": {
+    "prefix": "--vcsi-font-weight-medium",
+    "body": "--vcsi-font-weight-medium: ${1:500};",
+    "description": "Medium font weight"
+  },
+  "--vcsi-font-weight-semibold": {
+    "prefix": "--vcsi-font-weight-semibold",
+    "body": "--vcsi-font-weight-semibold: ${1:600};",
+    "description": "Semibold font weight"
+  },
+  "--vcsi-font-weight-bold": {
+    "prefix": "--vcsi-font-weight-bold",
+    "body": "--vcsi-font-weight-bold: ${1:700};",
+    "description": "Bold font weight"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Line heights
+  // =============================================================================
+  "--vcsi-line-height-tight": {
+    "prefix": "--vcsi-line-height-tight",
+    "body": "--vcsi-line-height-tight: ${1:1.17};",
+    "description": "Tight line height (large headings)"
+  },
+  "--vcsi-line-height-snug": {
+    "prefix": "--vcsi-line-height-snug",
+    "body": "--vcsi-line-height-snug: ${1:1.33};",
+    "description": "Snug line height (subheadings)"
+  },
+  "--vcsi-line-height-normal": {
+    "prefix": "--vcsi-line-height-normal",
+    "body": "--vcsi-line-height-normal: ${1:1.5};",
+    "description": "Normal line height (body text)"
+  },
+  "--vcsi-line-height-relaxed": {
+    "prefix": "--vcsi-line-height-relaxed",
+    "body": "--vcsi-line-height-relaxed: ${1:1.6};",
+    "description": "Relaxed line height (long-form reading)"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Font sizes (with responsive clamp)
+  // =============================================================================
+  "--vcsi-font-size-giant": {
+    "prefix": "--vcsi-font-size-giant",
+    "body": "--vcsi-font-size-giant: ${1:clamp(3rem, 10vw, 4rem)};",
+    "description": "Giant display text"
+  },
+  "--vcsi-font-size-xl": {
+    "prefix": "--vcsi-font-size-xl",
+    "body": "--vcsi-font-size-xl: ${1:clamp(1.8rem, 5vw, 3rem)};",
+    "description": "Extra large text"
+  },
+  "--vcsi-font-size-lg": {
+    "prefix": "--vcsi-font-size-lg",
+    "body": "--vcsi-font-size-lg: ${1:clamp(1.5rem, 2.5vw, 2.5rem)};",
+    "description": "Large text"
+  },
+  "--vcsi-font-size-md": {
+    "prefix": "--vcsi-font-size-md",
+    "body": "--vcsi-font-size-md: ${1:clamp(1.25rem, 1.75vw, 1.75rem)};",
+    "description": "Medium text"
+  },
+  "--vcsi-font-size-base": {
+    "prefix": "--vcsi-font-size-base",
+    "body": "--vcsi-font-size-base: ${1:clamp(1.125rem, 1.2vw, 1.25rem)};",
+    "description": "Base text (~18-20px)"
+  },
+  "--vcsi-font-size-small": {
+    "prefix": "--vcsi-font-size-small",
+    "body": "--vcsi-font-size-small: ${1:clamp(1rem, 1.1vw, 1.125rem)};",
+    "description": "Small text (~16-18px)"
+  },
+  "--vcsi-font-size-xs": {
+    "prefix": "--vcsi-font-size-xs",
+    "body": "--vcsi-font-size-xs: ${1:clamp(0.875rem, 1vw, 1rem)};",
+    "description": "Extra small text (~14-16px)"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Semantic heading sizes
+  // =============================================================================
+  "--vcsi-font-h1": {
+    "prefix": "--vcsi-font-h1",
+    "body": "--vcsi-font-h1: ${1:var(--vcsi-font-size-xl)};",
+    "description": "H1 font size"
+  },
+  "--vcsi-font-h2": {
+    "prefix": "--vcsi-font-h2",
+    "body": "--vcsi-font-h2: ${1:var(--vcsi-font-size-lg)};",
+    "description": "H2 font size"
+  },
+  "--vcsi-font-h3": {
+    "prefix": "--vcsi-font-h3",
+    "body": "--vcsi-font-h3: ${1:var(--vcsi-font-size-md)};",
+    "description": "H3 font size"
+  },
+  "--vcsi-font-h4": {
+    "prefix": "--vcsi-font-h4",
+    "body": "--vcsi-font-h4: ${1:var(--vcsi-font-size-base)};",
+    "description": "H4 font size"
+  },
+  "--vcsi-font-h5": {
+    "prefix": "--vcsi-font-h5",
+    "body": "--vcsi-font-h5: ${1:var(--vcsi-font-size-base)};",
+    "description": "H5 font size"
+  },
+  "--vcsi-font-h6": {
+    "prefix": "--vcsi-font-h6",
+    "body": "--vcsi-font-h6: ${1:var(--vcsi-font-size-small)};",
+    "description": "H6 font size"
+  },
+  "--vcsi-font-text": {
+    "prefix": "--vcsi-font-text",
+    "body": "--vcsi-font-text: ${1:var(--vcsi-font-size-base)};",
+    "description": "Body text font size"
+  },
+  "--vcsi-font-text-small": {
+    "prefix": "--vcsi-font-text-small",
+    "body": "--vcsi-font-text-small: ${1:var(--vcsi-font-size-small)};",
+    "description": "Small body text font size"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Spacing scale
+  // =============================================================================
+  "--vcsi-space-xs": {
+    "prefix": "--vcsi-space-xs",
+    "body": "--vcsi-space-xs: ${1:0.25rem};",
+    "description": "Extra small spacing"
+  },
+  "--vcsi-space-sm": {
+    "prefix": "--vcsi-space-sm",
+    "body": "--vcsi-space-sm: ${1:0.5rem};",
+    "description": "Small spacing"
+  },
+  "--vcsi-space-md": {
+    "prefix": "--vcsi-space-md",
+    "body": "--vcsi-space-md: ${1:1rem};",
+    "description": "Medium spacing"
+  },
+  "--vcsi-space-lg": {
+    "prefix": "--vcsi-space-lg",
+    "body": "--vcsi-space-lg: ${1:1.5rem};",
+    "description": "Large spacing"
+  },
+  "--vcsi-space-xl": {
+    "prefix": "--vcsi-space-xl",
+    "body": "--vcsi-space-xl: ${1:2rem};",
+    "description": "Extra large spacing"
+  },
+  "--vcsi-space-2xl": {
+    "prefix": "--vcsi-space-2xl",
+    "body": "--vcsi-space-2xl: ${1:3rem};",
+    "description": "2x extra large spacing"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Border radius
+  // =============================================================================
+  "--vcsi-radius-sm": {
+    "prefix": "--vcsi-radius-sm",
+    "body": "--vcsi-radius-sm: ${1:3px};",
+    "description": "Small border radius"
+  },
+  "--vcsi-radius-md": {
+    "prefix": "--vcsi-radius-md",
+    "body": "--vcsi-radius-md: ${1:6px};",
+    "description": "Medium border radius"
+  },
+  "--vcsi-radius-lg": {
+    "prefix": "--vcsi-radius-lg",
+    "body": "--vcsi-radius-lg: ${1:8px};",
+    "description": "Large border radius"
+  },
+  "--vcsi-radius-full": {
+    "prefix": "--vcsi-radius-full",
+    "body": "--vcsi-radius-full: ${1:9999px};",
+    "description": "Full/pill border radius"
+  },
+
+  // =============================================================================
+  // VCSI BASE TOKENS - Transitions
+  // =============================================================================
+  "--vcsi-transition-fast": {
+    "prefix": "--vcsi-transition-fast",
+    "body": "--vcsi-transition-fast: ${1:150ms ease};",
+    "description": "Fast transition"
+  },
+  "--vcsi-transition-base": {
+    "prefix": "--vcsi-transition-base",
+    "body": "--vcsi-transition-base: ${1:200ms ease};",
+    "description": "Base transition"
+  },
+  "--vcsi-transition-slow": {
+    "prefix": "--vcsi-transition-slow",
+    "body": "--vcsi-transition-slow: ${1:300ms ease};",
+    "description": "Slow transition"
+  },
+
+  // =============================================================================
+  // VCSI GLOBAL TOKENS - Semantic (auto-switch with theme)
+  // =============================================================================
+  "--vcsi-bg": {
+    "prefix": "--vcsi-bg",
+    "body": "--vcsi-bg: ${1:var(--vcsi-bg-light)};",
+    "description": "Page background (auto-switches with theme)"
+  },
+  "--vcsi-fg": {
+    "prefix": "--vcsi-fg",
+    "body": "--vcsi-fg: ${1:var(--vcsi-fg-light)};",
+    "description": "Page text color (auto-switches with theme)"
+  },
+  "--vcsi-hover": {
+    "prefix": "--vcsi-hover",
+    "body": "--vcsi-hover: ${1:var(--vcsi-hover-light)};",
+    "description": "Hover state color (auto-switches with theme)"
+  },
+  "--vcsi-border": {
+    "prefix": "--vcsi-border",
+    "body": "--vcsi-border: ${1:var(--vcsi-border-light)};",
+    "description": "Border color (auto-switches with theme)"
+  },
+  "--vcsi-link": {
+    "prefix": "--vcsi-link",
+    "body": "--vcsi-link: ${1:var(--vcsi-link-light)};",
+    "description": "Link color (auto-switches with theme)"
+  },
+  "--vcsi-muted": {
+    "prefix": "--vcsi-muted",
+    "body": "--vcsi-muted: ${1:var(--vcsi-gray-600)};",
+    "description": "Muted/secondary text color"
+  },
+
+  // =============================================================================
+  // VCSI GLOBAL TOKENS - Theme variants (light)
+  // =============================================================================
+  "--vcsi-bg-light": {
+    "prefix": "--vcsi-bg-light",
+    "body": "--vcsi-bg-light: ${1:var(--vcsi-color-beige)};",
+    "description": "Light theme background"
+  },
+  "--vcsi-fg-light": {
+    "prefix": "--vcsi-fg-light",
+    "body": "--vcsi-fg-light: ${1:var(--vcsi-gray-800)};",
+    "description": "Light theme text color"
+  },
+  "--vcsi-hover-light": {
+    "prefix": "--vcsi-hover-light",
+    "body": "--vcsi-hover-light: ${1:rgba(0, 0, 0, 0.05)};",
+    "description": "Light theme hover color"
+  },
+  "--vcsi-border-light": {
+    "prefix": "--vcsi-border-light",
+    "body": "--vcsi-border-light: ${1:var(--vcsi-gray-300)};",
+    "description": "Light theme border color"
+  },
+  "--vcsi-link-light": {
+    "prefix": "--vcsi-link-light",
+    "body": "--vcsi-link-light: ${1:var(--vcsi-fg-light)};",
+    "description": "Light theme link color"
+  },
+
+  // =============================================================================
+  // VCSI GLOBAL TOKENS - Theme variants (dark)
+  // =============================================================================
+  "--vcsi-bg-dark": {
+    "prefix": "--vcsi-bg-dark",
+    "body": "--vcsi-bg-dark: ${1:#1a1a1a};",
+    "description": "Dark theme background"
+  },
+  "--vcsi-fg-dark": {
+    "prefix": "--vcsi-fg-dark",
+    "body": "--vcsi-fg-dark: ${1:#e8e8e8};",
+    "description": "Dark theme text color"
+  },
+  "--vcsi-hover-dark": {
+    "prefix": "--vcsi-hover-dark",
+    "body": "--vcsi-hover-dark: ${1:rgba(255, 255, 255, 0.1)};",
+    "description": "Dark theme hover color"
+  },
+  "--vcsi-border-dark": {
+    "prefix": "--vcsi-border-dark",
+    "body": "--vcsi-border-dark: ${1:rgba(255, 255, 255, 0.15)};",
+    "description": "Dark theme border color"
+  },
+  "--vcsi-link-dark": {
+    "prefix": "--vcsi-link-dark",
+    "body": "--vcsi-link-dark: ${1:#8ab4f8};",
+    "description": "Dark theme link color"
+  },
+
+  // =============================================================================
+  // VCSI GLOBAL TOKENS - Code blocks
+  // =============================================================================
+  "--vcsi-code-bg": {
+    "prefix": "--vcsi-code-bg",
+    "body": "--vcsi-code-bg: ${1:var(--vcsi-code-bg-light)};",
+    "description": "Code block background (auto-switches)"
+  },
+  "--vcsi-code-fg": {
+    "prefix": "--vcsi-code-fg",
+    "body": "--vcsi-code-fg: ${1:var(--vcsi-code-fg-light)};",
+    "description": "Code block text color (auto-switches)"
+  },
+  "--vcsi-code-border": {
+    "prefix": "--vcsi-code-border",
+    "body": "--vcsi-code-border: ${1:var(--vcsi-code-border-light)};",
+    "description": "Code block border (auto-switches)"
+  },
+  "--vcsi-code-inline-bg": {
+    "prefix": "--vcsi-code-inline-bg",
+    "body": "--vcsi-code-inline-bg: ${1:var(--vcsi-code-inline-bg-light)};",
+    "description": "Inline code background (auto-switches)"
+  },
+  "--vcsi-code-highlight": {
+    "prefix": "--vcsi-code-highlight",
+    "body": "--vcsi-code-highlight: ${1:var(--vcsi-code-highlight-light)};",
+    "description": "Code highlight color (auto-switches)"
+  },
+  "--vcsi-blockquote": {
+    "prefix": "--vcsi-blockquote",
+    "body": "--vcsi-blockquote: ${1:var(--vcsi-blockquote-light)};",
+    "description": "Blockquote accent color (auto-switches)"
+  },
+
+  // =============================================================================
+  // VCSI LAYOUT TOKENS
+  // =============================================================================
+  "--vcsi-page-max-width": {
+    "prefix": "--vcsi-page-max-width",
+    "body": "--vcsi-page-max-width: ${1:1200px};",
+    "description": "Maximum page width"
+  },
+  "--vcsi-page-inline-padding": {
+    "prefix": "--vcsi-page-inline-padding",
+    "body": "--vcsi-page-inline-padding: ${1:5%};",
+    "description": "Page horizontal padding"
+  },
+  "--vcsi-content-padding-inline": {
+    "prefix": "--vcsi-content-padding-inline",
+    "body": "--vcsi-content-padding-inline: ${1:2rem};",
+    "description": "Content horizontal padding"
+  },
+  "--vcsi-content-max-width": {
+    "prefix": "--vcsi-content-max-width",
+    "body": "--vcsi-content-max-width: ${1:600px};",
+    "description": "Maximum content width for prose"
+  },
+  "--vcsi-nav-height": {
+    "prefix": "--vcsi-nav-height",
+    "body": "--vcsi-nav-height: ${1:4.5rem};",
+    "description": "Navigation bar height"
+  },
+  "--vcsi-nav-bg": {
+    "prefix": "--vcsi-nav-bg",
+    "body": "--vcsi-nav-bg: ${1:var(--vcsi-bg)};",
+    "description": "Navigation background color"
+  },
+  "--vcsi-nav-fg": {
+    "prefix": "--vcsi-nav-fg",
+    "body": "--vcsi-nav-fg: ${1:var(--vcsi-fg)};",
+    "description": "Navigation text/icon color"
+  },
+  "--vcsi-bottom-padding": {
+    "prefix": "--vcsi-bottom-padding",
+    "body": "--vcsi-bottom-padding: ${1:7.5rem};",
+    "description": "Bottom page padding"
+  },
+
+  // =============================================================================
+  // VCSI LAYOUT VARIABLES - Split Layout (from layouts.css)
+  // =============================================================================
+  "--vcsi-panel-width": {
+    "prefix": "--vcsi-panel-width",
+    "body": "--vcsi-panel-width: ${1:45%};",
+    "description": "Width of sticky panel in split layout"
+  },
+  "--vcsi-panel-min-width": {
+    "prefix": "--vcsi-panel-min-width",
+    "body": "--vcsi-panel-min-width: ${1:450px};",
+    "description": "Minimum panel width in split layout"
+  },
+  "--vcsi-panel-height": {
+    "prefix": "--vcsi-panel-height",
+    "body": "--vcsi-panel-height: ${1:min(80vh, 600px)};",
+    "description": "Panel height in split layout"
+  },
+  "--vcsi-panel-top-offset": {
+    "prefix": "--vcsi-panel-top-offset",
+    "body": "--vcsi-panel-top-offset: ${1:calc((100vh - var(--vcsi-panel-height)) / 2)};",
+    "description": "Vertical position of sticky panel (auto-centered)"
+  },
+  "--vcsi-layout-gap": {
+    "prefix": "--vcsi-layout-gap",
+    "body": "--vcsi-layout-gap: ${1:2rem};",
+    "description": "Gap between columns in layouts"
+  },
+
+  // =============================================================================
+  // VCSI LAYOUT VARIABLES - Fullscreen Layout (from layouts.css)
+  // =============================================================================
+  "--vcsi-step-max-width": {
+    "prefix": "--vcsi-step-max-width",
+    "body": "--vcsi-step-max-width: ${1:500px};",
+    "description": "Max width of step boxes in fullscreen layout"
+  },
+  "--vcsi-step-padding": {
+    "prefix": "--vcsi-step-padding",
+    "body": "--vcsi-step-padding: ${1:2rem};",
+    "description": "Padding inside steps in fullscreen layout"
+  },
+  "--vcsi-step-pointer-events": {
+    "prefix": "--vcsi-step-pointer-events",
+    "body": "--vcsi-step-pointer-events: ${1|none,auto|};",
+    "description": "Allows clicks to pass through to panel"
+  },
+
+  // =============================================================================
+  // VCSI LAYOUT VARIABLES - Dashboard Layout (from layouts.css)
+  // =============================================================================
+  "--vcsi-sidebar-width": {
+    "prefix": "--vcsi-sidebar-width",
+    "body": "--vcsi-sidebar-width: ${1:280px};",
+    "description": "Sidebar width when open"
+  },
+  "--vcsi-sidebar-collapsed-width": {
+    "prefix": "--vcsi-sidebar-collapsed-width",
+    "body": "--vcsi-sidebar-collapsed-width: ${1:48px};",
+    "description": "Sidebar width when collapsed"
+  },
+  "--vcsi-sidebar-bg": {
+    "prefix": "--vcsi-sidebar-bg",
+    "body": "--vcsi-sidebar-bg: ${1:#ebe6e1};",
+    "description": "Sidebar background color"
+  },
+  "--vcsi-sidebar-transition": {
+    "prefix": "--vcsi-sidebar-transition",
+    "body": "--vcsi-sidebar-transition: ${1:var(--vcsi-transition-slow)};",
+    "description": "Animation timing for sidebar collapse/expand"
+  },
+  "--vcsi-z-overlay": {
+    "prefix": "--vcsi-z-overlay",
+    "body": "--vcsi-z-overlay: ${1:1000};",
+    "description": "Z-index for mobile overlay"
+  },
+
+  // =============================================================================
+  // VCSI LAYOUT VARIABLES - Story (from layouts.css)
+  // =============================================================================
+  "--vcsi-story-bg": {
+    "prefix": "--vcsi-story-bg",
+    "body": "--vcsi-story-bg: ${1:var(--vcsi-color-beige)};",
+    "description": "Story background color"
+  },
+  "--vcsi-story-fg": {
+    "prefix": "--vcsi-story-fg",
+    "body": "--vcsi-story-fg: ${1:rgb(55, 55, 55)};",
+    "description": "Story text color"
+  },
+  "--vcsi-story-max-width": {
+    "prefix": "--vcsi-story-max-width",
+    "body": "--vcsi-story-max-width: ${1:600px};",
+    "description": "Max width for prose in stories"
+  },
+
+  // =============================================================================
+  // COMPONENT VARIABLES - Story (set in components, not tokens.css)
+  // =============================================================================
+  "--story-bg": {
+    "prefix": "--story-bg",
+    "body": "--story-bg: ${1:#353839};",
+    "description": "Story page background color"
+  },
+  "--story-fg": {
+    "prefix": "--story-fg",
+    "body": "--story-fg: ${1:white};",
+    "description": "Story page text color"
+  },
+  "--story-step-bg": {
+    "prefix": "--story-step-bg",
+    "body": "--story-step-bg: ${1:#2a2a2a};",
+    "description": "Background for scrolly step boxes"
+  },
+  "--story-step-fg": {
+    "prefix": "--story-step-fg",
+    "body": "--story-step-fg: ${1:#e8e8e8};",
+    "description": "Text color for scrolly step boxes"
+  },
+  "--story-step-bg-inactive": {
+    "prefix": "--story-step-bg-inactive",
+    "body": "--story-step-bg-inactive: ${1:#222};",
+    "description": "Background for inactive/faded step boxes"
+  },
+  "--story-step-fg-inactive": {
+    "prefix": "--story-step-fg-inactive",
+    "body": "--story-step-fg-inactive: ${1:#666};",
+    "description": "Text color for inactive step boxes"
+  },
+
+  // =============================================================================
+  // COMPONENT VARIABLES - Step/Scrolly (set in components, not tokens.css)
+  // =============================================================================
+  "--step-height": {
+    "prefix": "--step-height",
+    "body": "--step-height: ${1:90vh};",
+    "description": "Height of each scroll step"
+  },
+  "--step-max-width": {
+    "prefix": "--step-max-width",
+    "body": "--step-max-width: ${1:400px};",
+    "description": "Max width of step text boxes"
+  },
+  "--step-padding": {
+    "prefix": "--step-padding",
+    "body": "--step-padding: ${1:1.5rem};",
+    "description": "Padding inside step boxes"
+  },
+  "--step-border-radius": {
+    "prefix": "--step-border-radius",
+    "body": "--step-border-radius: ${1:8px};",
+    "description": "Border radius of step boxes"
+  },
+  "--step-box-shadow": {
+    "prefix": "--step-box-shadow",
+    "body": "--step-box-shadow: ${1:1px 1px 10px rgba(0, 0, 0, 0.2)};",
+    "description": "Shadow for step boxes"
+  },
+  "--scrolly-max-width": {
+    "prefix": "--scrolly-max-width",
+    "body": "--scrolly-max-width: ${1:600px};",
+    "description": "Max width of scrolly content container"
+  },
+  "--scrolly-pointer-events": {
+    "prefix": "--scrolly-pointer-events",
+    "body": "--scrolly-pointer-events: ${1|auto,none|};",
+    "description": "Pointer events (auto or none for click-through)"
+  },
+
+  // =============================================================================
+  // COMPONENT VARIABLES - Panel/Layout (set in components, not tokens.css)
+  // =============================================================================
+  "--panel-height": {
+    "prefix": "--panel-height",
+    "body": "--panel-height: ${1:min(80vh, 600px)};",
+    "description": "Sticky panel height in layouts"
+  },
+  "--panel-width": {
+    "prefix": "--panel-width",
+    "body": "--panel-width: ${1:45%};",
+    "description": "Sticky panel width in split layout"
+  },
+  "--panel-min-width": {
+    "prefix": "--panel-min-width",
+    "body": "--panel-min-width: ${1:450px};",
+    "description": "Min sticky panel width"
+  },
+  "--layout-gap": {
+    "prefix": "--layout-gap",
+    "body": "--layout-gap: ${1:2rem};",
+    "description": "Gap between layout columns"
+  },
+
+  // =============================================================================
+  // VAR() WRAPPERS - Quick references
+  // =============================================================================
+  "var(--vcsi-color-*)": {
+    "prefix": "var--vcsi-color",
+    "body": "var(--vcsi-color-${1|black,white,beige,accent,uvm-green,uvm-gold|})",
+    "description": "VCSI color variable reference"
+  },
+  "var(--vcsi-gray-*)": {
+    "prefix": "var--vcsi-gray",
+    "body": "var(--vcsi-gray-${1|100,200,300,400,600,700,800,900|})",
+    "description": "VCSI gray scale reference"
+  },
+  "var(--vcsi-font-*)": {
+    "prefix": "var--vcsi-font",
+    "body": "var(--vcsi-font-${1|sans,serif,mono,heading,h1,h2,h3,h4,h5,h6,text,text-small|})",
+    "description": "VCSI font variable reference"
+  },
+  "var(--vcsi-font-size-*)": {
+    "prefix": "var--vcsi-font-size",
+    "body": "var(--vcsi-font-size-${1|giant,xl,lg,md,base,small,xs|})",
+    "description": "VCSI font size reference"
+  },
+  "var(--vcsi-font-weight-*)": {
+    "prefix": "var--vcsi-font-weight",
+    "body": "var(--vcsi-font-weight-${1|light,regular,medium,semibold,bold|})",
+    "description": "VCSI font weight reference"
+  },
+  "var(--vcsi-line-height-*)": {
+    "prefix": "var--vcsi-line-height",
+    "body": "var(--vcsi-line-height-${1|tight,snug,normal,relaxed|})",
+    "description": "VCSI line height reference"
+  },
+  "var(--vcsi-space-*)": {
+    "prefix": "var--vcsi-space",
+    "body": "var(--vcsi-space-${1|xs,sm,md,lg,xl,2xl|})",
+    "description": "VCSI spacing reference"
+  },
+  "var(--vcsi-radius-*)": {
+    "prefix": "var--vcsi-radius",
+    "body": "var(--vcsi-radius-${1|sm,md,lg,full|})",
+    "description": "VCSI border radius reference"
+  },
+  "var(--vcsi-transition-*)": {
+    "prefix": "var--vcsi-transition",
+    "body": "var(--vcsi-transition-${1|fast,base,slow|})",
+    "description": "VCSI transition reference"
+  },
+  "var(--vcsi-semantic)": {
+    "prefix": "var--vcsi",
+    "body": "var(--vcsi-${1|bg,fg,hover,border,link,muted,code-bg,code-fg,code-border,code-inline-bg,code-highlight,blockquote|})",
+    "description": "VCSI semantic token reference"
+  },
+  "var(--story-*)": {
+    "prefix": "var--story",
+    "body": "var(--story-${1|bg,fg,step-bg,step-fg,step-bg-inactive,step-fg-inactive|})",
+    "description": "Story CSS variable reference"
+  },
+  "var(--step-*)": {
+    "prefix": "var--step",
+    "body": "var(--step-${1|height,max-width,padding,border-radius,box-shadow|})",
+    "description": "Step CSS variable reference"
+  },
+  "var(--panel-*)": {
+    "prefix": "var--panel",
+    "body": "var(--panel-${1|height,width,min-width|})",
+    "description": "Panel CSS variable reference"
+  },
+  "var(--vcsi-panel-*)": {
+    "prefix": "var--vcsi-panel",
+    "body": "var(--vcsi-panel-${1|width,min-width,height,top-offset|})",
+    "description": "VCSI panel layout variable reference"
+  },
+  "var(--vcsi-sidebar-*)": {
+    "prefix": "var--vcsi-sidebar",
+    "body": "var(--vcsi-sidebar-${1|width,collapsed-width,bg,transition|})",
+    "description": "VCSI sidebar variable reference"
+  },
+  "var(--vcsi-story-*)": {
+    "prefix": "var--vcsi-story",
+    "body": "var(--vcsi-story-${1|bg,fg,max-width|})",
+    "description": "VCSI story variable reference"
+  },
+  "var(--vcsi-step-*)": {
+    "prefix": "var--vcsi-step",
+    "body": "var(--vcsi-step-${1|max-width,padding,pointer-events|})",
+    "description": "VCSI step (fullscreen) variable reference"
+  },
+  "var(--vcsi-layout-*)": {
+    "prefix": "var--vcsi-layout",
+    "body": "var(--vcsi-layout-${1|gap|})",
+    "description": "VCSI layout variable reference"
+  }
+}

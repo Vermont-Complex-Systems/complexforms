@@ -1,0 +1,74 @@
+{
+	"title": "Example Story 1",
+	"subtitle": "Story subtitle",
+	"authors": [
+		{
+			"name": "Author Name",
+			"url": ""
+		}
+	],
+	"date": "Feb 18, 2026",
+	"introduction": [
+		{
+			"type": "markdown",
+			"value": "In this story, we investigate some key relationships between the GAFA."
+		}
+	],
+	"steps": [
+		{
+			"type": "markdown",
+			"value": "### Microsoft and OpenAI\nThis is the <span style='background-color: rgb(153 102 153);'>first step</span>.. All bars start neutral.",
+			"highlighted": null,
+			"scale": {}
+		},
+		{
+			"type": "markdown",
+			"value": "Now we highlight This is the <span style='background-color: rgb(103 222 53);'>bar B</span> — the highest value.",
+			"highlighted": "B",
+			"scale": {
+				"B": 1.4
+			}
+		},
+		{
+			"type": "markdown",
+			"value": "Let's look at **bar A** instead.",
+			"highlighted": "A",
+			"scale": {
+				"A": 1.5
+			}
+		},
+		{
+			"type": "markdown",
+			"value": "Finally, all bars grow together.",
+			"highlighted": "all",
+			"scale": {
+				"A": 1.5,
+				"B": 1.4,
+				"C": 1.3
+			}
+		},
+		{
+			"type": "markdown",
+			"value": "Now let's transform to **dots**.",
+			"highlighted": "all",
+			"scale": {},
+			"shape": "dot"
+		},
+		{
+			"type": "markdown",
+			"value": "And now they **bounce**!",
+			"highlighted": "all",
+			"scale": {},
+			"shape": "dot",
+			"animate": "bounce"
+		},
+		{
+			"type": "markdown",
+			"value": "Lets stop now, Good bye!",
+			"highlighted": "all",
+			"scale": {},
+			"shape": "dot"
+		}
+	],
+	"conclusion": "That's all folks, have fun."
+}
