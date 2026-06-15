@@ -7,7 +7,7 @@
 	import DemographicsBox from './DemographicsBox.svelte';
 	import SurveyScrolly from './SurveyScrolly.svelte';
 	import { saveAnswer as saveAnswerRemote, getSurveyResponse } from '../data/survey.remote.js';
-	import type { SurveyField } from '$lib/server/db/schema';
+	import type { SurveyField } from '../data/schema';
 
 	let { story, data } = $props();
 

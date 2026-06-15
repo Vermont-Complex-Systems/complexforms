@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { SurveyField } from '$lib/server/db/schema';
+    import type { SurveyField } from '../data/schema';
 
     let {
         onAccept,
