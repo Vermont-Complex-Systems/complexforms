@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { generateFingerprint } from '$lib/utils/browserFingerprint.js';
-	import { StoryHeader, ScrollIndicator, RenderContent, Footer } from '@the-vcsi/scrolly-kit';
+	import { StoryHeader, ScrollIndicator, RenderContent } from '@the-vcsi/scrolly-kit';
+	import Footer from '$lib/components/Footer.svelte';
 	import BackToHome from '$lib/components/helpers/BackToHome.svelte';
 	import ConsentPopup from './ConsentPopup.svelte';
 	import DemographicsBox from './DemographicsBox.svelte';
