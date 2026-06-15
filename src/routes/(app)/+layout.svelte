@@ -1,10 +1,11 @@
 <script>
-	import { Nav, Footer } from '@the-vcsi/scrolly-kit';
+	import { Footer } from '@the-vcsi/scrolly-kit';
+	import Header from '$lib/components/Header.svelte';
 
 	let { children } = $props();
 </script>
 
-<Nav />
+<Header />
 
 <main id="content">
 	{@render children?.()}
