@@ -334,6 +334,8 @@ git commit -m "feat(interdisc): pure agreement/stats logic with unit tests"
 Create `src/lib/stories/interdisciplinarity/data/openalex.ts`:
 
 ```ts
+import { env } from '$env/dynamic/private';
+
 const MAILTO = 'complex-stories@uvm.edu';
 
 export type Paper = {
@@ -368,6 +370,8 @@ export async function fetchPaperFromOpenAlex(paperId: string): Promise<Paper> {
 		filter: `openalex:https://openalex.org/${paperId}`,
 		select: 'id,title,publication_year,abstract_inverted_index,authorships,topics,doi,open_access'
 	});
+	// OpenAlex premium key (gitignored .env) — higher rate limits if present.
+	if (env.OPENALEX_API_KEY) params.set('api_key', env.OPENALEX_API_KEY);
 	const res = await fetch(`https://api.openalex.org/works?${params}`, {
 		headers: { 'User-Agent': `mailto:${MAILTO}` }
 	});
