@@ -1,4 +1,4 @@
-import type { SurveyField } from '$lib/server/db/schema';
+import type { SurveyField } from './schema';
 
 // type-only import above is erased at runtime, so vitest needs no $lib alias.
 

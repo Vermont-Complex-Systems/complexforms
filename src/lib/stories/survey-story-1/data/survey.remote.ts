@@ -1,8 +1,8 @@
 import * as v from 'valibot';
 import { command, query } from '$app/server';
 import { eq } from 'drizzle-orm';
-import { db } from '$lib/server/db';
-import { darkDataSurvey } from '$lib/server/db/schema';
+import { db } from './db';
+import { darkDataSurvey } from './schema';
 import { isValidField, processValue } from './survey.fields';
 
 // Single entry point for saving a survey answer (upsert by fingerprint).
