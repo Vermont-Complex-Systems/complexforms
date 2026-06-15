@@ -37,8 +37,10 @@
     "better-sqlite3": "^12.10.1",
     "bits-ui": "^2.18.1",
     "d3": "^7.9.0",
+    "d3-interpolate": "^3.0.1",
     "drizzle-orm": "^0.45.2",
     "mode-watcher": "^1.1.0",
+    "svelteplot": "^0.14.2",
     "valibot": "^1.2.0"
   }
 }
