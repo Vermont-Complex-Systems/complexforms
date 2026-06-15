@@ -6,6 +6,10 @@ import { papers, paperAnnotations } from '$lib/server/db/schema';
 import { fetchPaperFromOpenAlex } from './openalex';
 import { computeAgreement, type AnnRow } from './interdisciplinarity.logic';
 
+// OpenAlex IDs may arrive as bare (W123) or full URL (https://openalex.org/W123);
+// the cache + agreement keys on the bare form, so normalize everywhere.
+const bareId = (id: string) => id.replace(/^https?:\/\/openalex\.org\//, '');
+
 // Resolve current annotator: logged-in better-auth user id, else provided fingerprint.
 function annotator(fingerprint?: string): { userId: string | null; fingerprint: string | null } {
 	const { locals } = getRequestEvent();
@@ -20,7 +24,8 @@ export const getCurrentUser = query(async () => {
 });
 
 // Lazy paper cache: local first, else OpenAlex + write-through.
-export const getPaperById = query(v.string(), async (paperId) => {
+export const getPaperById = query(v.string(), async (rawId) => {
+	const paperId = bareId(rawId);
 	const cached = db.select().from(papers).where(eq(papers.id, paperId)).get();
 	if (cached) {
 		return {
@@ -63,9 +68,10 @@ export const annotatePaper = command(
 		const { userId, fingerprint } = annotator(input.fingerprint);
 		if (!userId && !fingerprint) throw new Error('Login or fingerprint required');
 
+		const paperId = bareId(input.paper_id);
 		const where = userId
-			? and(eq(paperAnnotations.paperId, input.paper_id), eq(paperAnnotations.userId, userId))
-			: and(eq(paperAnnotations.paperId, input.paper_id), eq(paperAnnotations.fingerprint, fingerprint!));
+			? and(eq(paperAnnotations.paperId, paperId), eq(paperAnnotations.userId, userId))
+			: and(eq(paperAnnotations.paperId, paperId), eq(paperAnnotations.fingerprint, fingerprint!));
 		const existing = db.select().from(paperAnnotations).where(where).get();
 
 		if (existing) {
@@ -80,7 +86,7 @@ export const annotatePaper = command(
 		} else {
 			db.insert(paperAnnotations)
 				.values({
-					paperId: input.paper_id,
+					paperId,
 					userId,
 					fingerprint,
 					rating: input.interdisciplinarity_rating,

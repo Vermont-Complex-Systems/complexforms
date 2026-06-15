@@ -126,7 +126,6 @@
 	<h2>Your Annotation Progress</h2>
 	<p class="subtitle">
 		{myAnnotations.length} of {totalPapers} papers annotated
-		({paperIds.length} CSV + {generalPapers.length} community + {myPapers.length} your papers)
 	</p>
 </header>
 

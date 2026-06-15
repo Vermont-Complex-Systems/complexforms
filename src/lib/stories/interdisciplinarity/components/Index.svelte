@@ -35,7 +35,12 @@
 	const csvQueuePaperIds = $derived(
 		paperIds.filter((id) => !myAnnotations.find((a) => a.paper_id === id))
 	);
-	const activePaperIds = $derived(mode === 'overview' ? paperIds : csvQueuePaperIds);
+	// Overview shows the queue plus any other papers you've annotated, so your
+	// out-of-queue annotations are visible (metadata served from cache / OpenAlex).
+	const overviewPaperIds = $derived([
+		...new Set([...paperIds, ...myAnnotations.map((a) => a.paper_id)])
+	]);
+	const activePaperIds = $derived(mode === 'overview' ? overviewPaperIds : csvQueuePaperIds);
 	const currentPaperId = $derived(activePaperIds[currentIndex]);
 	const paper = $derived.by(async () => {
 		if (!currentPaperId) return null;
@@ -131,7 +136,8 @@
 			<Story />
 		{:else if mode === 'overview'}
 			<OverviewTable
-				{paperIds}
+				paperIds={overviewPaperIds}
+				{csvQueuePaperIds}
 				{myAnnotations}
 				{annotationCounts}
 				{agreementData}

@@ -55,10 +55,12 @@ const importPapers = db.transaction((rows) => {
 	}
 });
 
+const bareId = (id) => id.replace(/^https?:\/\/openalex\.org\//, '');
+
 const importAnns = db.transaction((rows) => {
 	for (const a of rows) {
 		insAnn.run({
-			paper_id: a.paper_id,
+			paper_id: bareId(a.paper_id),
 			fingerprint: a.fingerprint ?? `import_u${a.user_id}`,
 			rating: a.interdisciplinarity_rating,
 			confidence: a.confidence ?? null,
