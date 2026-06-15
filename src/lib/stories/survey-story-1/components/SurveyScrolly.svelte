@@ -1,18 +1,22 @@
 <script lang="ts">
 	import { Scrolly, RenderContent } from '@the-vcsi/scrolly-kit';
+	import type { ContentItem } from '@the-vcsi/scrolly-kit';
 	import Question from './SurveyQuestion.svelte';
 	import type { SurveyField } from '$lib/server/db/schema';
 
-	type SurveyItem = {
-		type: 'question' | 'text';
+	type QuestionItem = {
+		type: 'question';
 		value: {
 			question: string;
 			name: SurveyField;
 			options: { value: string; label: string }[];
 			multiple?: boolean;
-			text?: string;
 		};
 	};
+
+	// A survey step is either a question or any scrolly-kit content item
+	// (markdown/html/math/code) rendered as prose between questions.
+	type SurveyItem = QuestionItem | ContentItem;
 
 	let {
 		items,
