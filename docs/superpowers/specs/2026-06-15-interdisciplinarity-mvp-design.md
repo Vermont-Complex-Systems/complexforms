@@ -36,14 +36,19 @@ session). All data is local; no FastAPI.
 Replaces the API proxy. Lives behind story-local remote functions so the engine
 stays swappable.
 
-- **Papers** — populated via the **`@the-vcsi/openalex`** scrolly-kit extension
-  (`npx sv add @the-vcsi/openalex`): it generates paper/author tables in the app
-  schema + a `scripts/populate-openalex-db.js`. We adapt that script to ingest the
-  94 `oa_wid` IDs from `top_cited_papers_comp_networks.csv` and run
-  `npm run db:populate-openalex` once. The tool reads paper metadata locally.
-  - **Open risk (resolve in plan):** the tool's `PaperAnnotationCard` shows title,
-    authors, abstract, topics, year, doi. If the extension's generated paper table
-    omits abstract/topics, extend the schema + populate script to include them.
+- **Papers** — a local `papers` **cache table** (we own the schema, so abstract +
+  topics are guaranteed) with **lazy fetch + cache** in `getPaperById`, mirroring
+  the original backend: check the local table; on miss, fetch the work from
+  OpenAlex server-side (reconstruct the abstract from the inverted index, take
+  first 5 authors, top 3 topics), write it through to `papers`, and return it. The
+  CSV (`top_cited_papers_comp_networks.csv` → `loader.js`) supplies the 94 queue
+  IDs client-side; papers are fetched on demand as the user works the queue. No
+  pre-population step.
+  - *(The `@the-vcsi/openalex` extension was the original plan but is not
+    installable — 404 on npm, not bundled in the installed scrolly-kit packages —
+    so we use this lazy-cache approach, the original backend's behavior.)*
+  - OpenAlex requests send a `User-Agent` mailto (constant/env), per OpenAlex
+    etiquette.
 - **Annotations** — new module `src/lib/server/db/schema/interdisciplinarity.ts`
   (tier-2, added to the schema barrel — no new drizzle config):
 
@@ -64,7 +69,8 @@ stays swappable.
   all local:
   - `annotatePaper({ paperId, rating, confidence?, fingerprint? })` — upsert by
     `locals.user.id` if logged in, else `fingerprint`.
-  - `getPaperById(paperId)` — read from the local papers table.
+  - `getPaperById(paperId)` — local `papers` cache; on miss, fetch from OpenAlex
+    server-side, cache, return.
   - `getMyAnnotations({ fingerprint? })` — by `locals.user.id` or `fingerprint`.
   - `getAnnotationStats()` — total, average rating, rating distribution, per-paper
     counts (computed in JS/SQL from `paper_annotations`).
@@ -95,8 +101,8 @@ Story-local under `src/lib/stories/interdisciplinarity/`, served at
 
 ## Verification
 
-- Extension populate run fills the papers table with the 94 curated papers
-  (inspect row count via sqlite).
+- First view of a paper fetches it from OpenAlex and caches it (a `papers` row
+  appears; second view serves from cache with no network call).
 - Annotation unit tests (agreement math + coercion) pass.
 - Browser: open `/interdisciplinarity` → read the story; csv-queue shows a paper
   card; submitting a rating writes a `paper_annotations` row (verify in sqlite,
