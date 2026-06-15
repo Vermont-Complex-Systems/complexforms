@@ -44,7 +44,7 @@
 
 		<div class="header-right">
 			{#if user}
-				<span class="nav-user">{user.name}</span>
+				<a class="nav-user" href="{base}/account">{user.name}</a>
 				<button class="nav-auth" onclick={logout}>Log out</button>
 			{:else}
 				<a class="nav-auth" href="{base}/login">Log in</a>
@@ -189,6 +189,11 @@
 	font-size: 0.95rem;
 	color: var(--vcsi-fg);
 	align-self: center;
+	text-decoration: none;
+}
+
+.nav-user:hover {
+	text-decoration: underline;
 }
 
 .nav-auth {
