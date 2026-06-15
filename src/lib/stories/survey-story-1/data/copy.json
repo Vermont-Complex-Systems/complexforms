@@ -1,0 +1,87 @@
+{
+	"title": "Survey story",
+	"subtitle": "Centered survey layout",
+	"authors": [
+        { 
+			"name": "Jonathan St-Onge", 
+			"url": "https://complexstories.uvm.edu/author/jonathan-st-onge" 
+		}
+    ],
+	"date": "Feb 3, 2026",
+	"intro": [
+		{
+			"type": "markdown",
+			"value": "Building a simple survey is really just about making [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) apps. Here we show how to make such CRUD apps using Sveltekit and a sqlite database. We discuss the implementation details below in the appendix. But first, why? Why a custom platform for survey instead of something like Qualtrics?"
+		},
+		{
+			"type": "markdown",
+			"value": "The short answer is that (i) it is not all that hard, for simple apps, (ii) mobile first so that people can do that when bored, and (iii) we can integrate data collection as part of our data pipeline instead of outsourcing it. This opens up quite a few possibilities; we can intervene in that feedback loop more easily."
+		},
+		{
+			"type": "markdown",
+			"value": "Yet, there are challenges in spinning up our own survey platform. A few things that come to my mind; more code to manage, managing spamming (but Qualtrics too have some issues), identifying users, ethically, etc. I think these are issues we need to think through anytime we want to ask people to give their data online."
+		},
+		{
+			"type": "markdown",
+			"value": "Below, we show a few questions asked in a survey on privacy. We kept a few questions that embody different Question types we implemented so far, i.e. radio, checkbox (multiple or simple values). We show them as if they are a scrolly story, meaning we can integrate them to our visualization stories, if we wanted to."
+		}
+	],
+	"survey": [
+		{
+			"type": "question",
+			"value": {
+				"question": "Are your social media profiles typically public or private?",
+				"name": "socialMediaPrivacy",
+				"options": [
+					{ "value": "private", "label": "Private" },
+					{ "value": "mixed", "label": "Mixed" },
+					{ "value": "public", "label": "Public" }
+				]
+			}
+		},
+		{
+			"type": "question",
+			"value": {
+				"question": "Which social media platforms do you use? (multiple choices)",
+				"name": "platformMatters",
+				"multiple": true,
+				"options": [
+					{ "value": "Twitter", "label": "Twitter" },
+					{ "value": "Instagram", "label": "Instagram" },
+					{ "value": "Facebook", "label": "Facebook" },
+					{ "value": "TikTok", "label": "TikTok" },
+					{ "value": "Other", "label": "Other" }
+				]
+			}
+		},
+		{
+			"type": "question",
+			"value": {
+				"question": "How comfortable are you with sharing your personally identifiable data with a relative?",
+				"name": "relativePreferences",
+				"options": [
+					{ "value": "1", "label": "Very Comfortable" },
+					{ "value": "2", "label": "Comfortable" },
+					{ "value": "3", "label": "Slightly comfortable" },
+					{ "value": "4", "label": "Neutral" },
+					{ "value": "5", "label": "Slightly Uncomfortable" },
+					{ "value": "6", "label": "Uncomfortable" },
+					{ "value": "7", "label": "Very Uncomfortable" }
+				]
+			}
+		}
+	],
+	"postSurvey": [
+		{
+		"type": "markdown",
+		"value": "We can also just have stand alone component asking for some questions as part of a group, as when we want to know about demographics."
+		}
+	],
+	"appendix": [
+		{
+		"type": "markdown",
+		"value": "We briefly discuss the implementation details here."
+		}
+	]
+}
+

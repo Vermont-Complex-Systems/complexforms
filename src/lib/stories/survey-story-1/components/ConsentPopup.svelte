@@ -1,0 +1,155 @@
+<script lang="ts">
+    import type { SurveyField } from '$lib/server/db/schema';
+
+    let {
+        onAccept,
+        userFingerprint,
+        saveAnswer
+    }: {
+        onAccept: () => Promise<void>;
+        userFingerprint: string;
+        saveAnswer: (field: SurveyField, value: string | number | string[]) => Promise<unknown>;
+    } = $props();
+
+    let showPopup = $state(true);
+
+    async function handleAccept() {
+        showPopup = false;
+        // Parent component (Index.svelte) will handle fingerprint generation and consent saving
+        await onAccept();
+    }
+
+    function handleDecline() {
+        showPopup = false;
+        // No tracking if user declines - fingerprint is never generated
+    }
+
+    // Dismiss only when the backdrop itself is clicked, not its content.
+    function handleBackdropClick(event: MouseEvent) {
+        if (event.target === event.currentTarget) handleDecline();
+    }
+
+    function handleKeydown(event: KeyboardEvent) {
+        if (event.key === 'Escape') handleDecline();
+    }
+</script>
+
+{#if showPopup}
+<div
+    class="popup-overlay"
+    role="button"
+    tabindex="0"
+    aria-label="Dismiss consent dialog"
+    onclick={handleBackdropClick}
+    onkeydown={handleKeydown}
+>
+    <div class="popup-content">
+        <div class="popup-body">
+            <p>This is an interactive data essay on privacy preferences and data sharing behaviors.</p>
+            <p>As part of the story, we ask a few anonymous questions about privacy preferences and demographics to inform the interactive story, and, conditional on consent, inform our ongoing research on the topic.</p>
+        </div>
+
+        <div class="popup-actions">
+            <button class="btn-decline" onclick={handleDecline}>Decline</button>
+            <button class="btn-accept" onclick={handleAccept}>I Consent</button>
+        </div>
+    </div>
+</div>
+{/if}
+
+<style>
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    .popup-content {
+        background: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        max-width: 400px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-body {
+        padding: 1.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+    }
+
+    .popup-body p {
+        margin: 0 0 1rem 0;
+    }
+
+    .popup-actions {
+        padding: 1rem 1.5rem 1.5rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+    }
+
+    .btn-decline {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .btn-decline:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: whitesmoke;
+    }
+
+    .btn-accept {
+        background: #0891b2;
+        color: white;
+    }
+
+    .btn-accept:hover {
+        background: #0e7490;
+    }
+
+    @media (max-width: 640px) {
+        .popup-content {
+            max-height: 95vh;
+        }
+
+
+        .popup-body {
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .popup-actions {
+            flex-direction: column-reverse;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+</style>
