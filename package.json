@@ -28,10 +28,12 @@
     "vitest": "^4.1.9"
   },
   "dependencies": {
+    "@better-auth/drizzle-adapter": "^1.6.18",
     "@fingerprintjs/fingerprintjs": "^5.2.0",
     "@lucide/svelte": "^0.562.0",
     "@rollup/plugin-dsv": "^3.0.5",
     "@the-vcsi/scrolly-kit": "*",
+    "better-auth": "^1.6.18",
     "better-sqlite3": "^12.10.1",
     "bits-ui": "^2.18.1",
     "d3": "^7.9.0",
