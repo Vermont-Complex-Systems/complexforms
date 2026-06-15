@@ -143,10 +143,17 @@ export const getAnnotationStats = query(async () => {
 // Inter-annotator agreement, in the API's shape.
 export const getAgreementData = query(async () => {
 	const rows = db.select().from(paperAnnotations).all();
+	// A distinct, short label per annotator. Seeded users are `import_u<id>`
+	// fingerprints — keep the id so they don't all collapse to one label.
+	const tag = (r: (typeof rows)[number]) => {
+		if (r.userId) return `user_${r.userId.slice(0, 6)}`;
+		const fp = r.fingerprint ?? '';
+		return fp.startsWith('import_u') ? `anon_${fp.slice('import_u'.length)}` : `anon_${fp.slice(0, 6)}`;
+	};
 	const annRows: AnnRow[] = rows.map((r) => ({
 		paper_id: r.paperId,
 		rating: r.rating,
-		annotator: r.userId ? `user_${r.userId}` : `anon_${(r.fingerprint ?? '').slice(0, 8)}`
+		annotator: tag(r)
 	}));
 	const paperIds = [...new Set(annRows.map((a) => a.paper_id))];
 	const titles: Record<string, string> = {};
