@@ -7,8 +7,16 @@
 	import logoDark from '$lib/assets/images/bumper-sticker2-white-transparent.png?enhanced';
 	import { authClient } from '$lib/auth-client';
 	import { invalidateAll } from '$app/navigation';
+	import { Avatar } from 'bits-ui';
 
 	let { user }: { user: { name: string } | null } = $props();
+
+	function getUserInitials(name: string) {
+		if (!name) return 'U';
+		const parts = name.trim().split(/\s+/);
+		if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+		return name.slice(0, 2).toUpperCase();
+	}
 
 	async function logout() {
 		await authClient.signOut();
@@ -44,7 +52,11 @@
 
 		<div class="header-right">
 			{#if user}
-				<span class="nav-user">{user.name}</span>
+				<a class="nav-avatar" href="{base}/account" title={user.name} aria-label="Account ({user.name})">
+					<Avatar.Root class="nav-avatar-root">
+						<Avatar.Fallback class="nav-avatar-fallback">{getUserInitials(user.name)}</Avatar.Fallback>
+					</Avatar.Root>
+				</a>
 				<button class="nav-auth" onclick={logout}>Log out</button>
 			{:else}
 				<a class="nav-auth" href="{base}/login">Log in</a>
@@ -184,11 +196,34 @@
 	background: var(--vcsi-hover, rgba(0, 0, 0, 0.05));
 }
 
-.nav-user {
+.nav-avatar {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	transition: transform var(--vcsi-transition-base);
+}
+
+.nav-avatar:hover {
+	transform: scale(1.05);
+}
+
+:global(.nav-avatar-root) {
+	width: 2.25rem;
+	height: 2.25rem;
+}
+
+:global(.nav-avatar-fallback) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background: var(--vcsi-color-uvm-green, #154734);
+	color: var(--vcsi-color-white, #fff);
+	border-radius: 50%;
 	font-family: var(--vcsi-font-sans);
-	font-size: 0.95rem;
-	color: var(--vcsi-fg);
-	align-self: center;
+	font-size: 0.8rem;
+	font-weight: 600;
 }
 
 .nav-auth {

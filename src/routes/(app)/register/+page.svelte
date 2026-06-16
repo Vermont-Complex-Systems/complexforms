@@ -15,7 +15,7 @@
 		const { error: err } = await authClient.signUp.email({ name, email, password });
 		submitting = false;
 		if (err) error = err.message ?? 'Registration failed';
-		else goto('/');
+		else await goto('/', { invalidateAll: true });
 	}
 </script>
 
