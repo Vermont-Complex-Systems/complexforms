@@ -32,7 +32,7 @@
     "@fingerprintjs/fingerprintjs": "^5.2.0",
     "@lucide/svelte": "^0.562.0",
     "@rollup/plugin-dsv": "^3.0.5",
-    "@the-vcsi/scrolly-kit": "*",
+    "@the-vcsi/scrolly-kit": "^0.2.0",
     "better-auth": "^1.6.18",
     "better-sqlite3": "^12.10.1",
     "bits-ui": "^2.18.1",
@@ -40,6 +40,7 @@
     "d3-interpolate": "^3.0.1",
     "drizzle-orm": "^0.45.2",
     "mode-watcher": "^1.1.0",
+    "svelte-meta-tags": "^5.0.1",
     "svelteplot": "^0.14.2",
     "valibot": "^1.2.0"
   }
