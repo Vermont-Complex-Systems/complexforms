@@ -131,10 +131,12 @@ ID comes to exist is the story's privacy posture — `identity` option:
 Then create the DB and register the story:
 
 ```bash
-# drizzle.my-story.config.ts pointing at your schema + db, then:
-npx drizzle-kit push --config drizzle.my-story.config.ts
+STORY=my-story npm run db:push:story   # creates/updates data/survey.db from schema.ts
 # add a row to src/lib/data/stories.csv
 ```
+
+(One shared `drizzle.story.config.ts` serves every story DB by convention —
+no per-story config file.)
 
 ## Building blocks
 
