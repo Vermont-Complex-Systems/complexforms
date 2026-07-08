@@ -5,7 +5,40 @@ content, answers land in a story-local SQLite file, keyed by an anonymous
 browser fingerprint and saved field-by-field as the reader interacts.
 
 You author **two things** — a Drizzle table and your questions. Two small glue
-files wire them together.
+files wire them together:
+
+```mermaid
+flowchart TB
+    subgraph author["You author"]
+        COPY["copy.json<br>the questions"]
+        SCHEMA["schema.ts<br>one column per answer"]
+    end
+
+    subgraph browser["Browser"]
+        Q["SurveyQuestion / SurveyScrolly<br>(render items, show Saved ✓)"]
+        CLIENT["createSurveyClient<br>identity: local | fingerprint | session"]
+        LS[("localStorage<br>ID minted on first answer")]
+    end
+
+    subgraph server["Server"]
+        REMOTE["survey.remote.ts<br>defineSurvey — fields and coercion<br>derived from the schema"]
+        DB[("survey.db")]
+    end
+
+    COPY -->|"items rendered by type"| Q
+    COPY -->|"seeds answers,<br>marks checkbox fields"| CLIENT
+    SCHEMA -->|"single source of truth"| REMOTE
+    Q <-->|"bind:value={answers[name]}"| CLIENT
+    Q -->|"saveAnswer(field, value)"| CLIENT
+    CLIENT -.->|"'local' mode"| LS
+    CLIENT -->|"command: saveAnswer<br>{fingerprint, field, value}"| REMOTE
+    REMOTE -->|"query: getSurveyResponse<br>hydrates a returning visitor"| CLIENT
+    REMOTE -->|"validate field, coerce value,<br>upsert by fingerprint"| DB
+```
+
+The reader's side is one loop: a question component binds an answer and calls
+`saveAnswer` on interaction; the client owns the visitor ID and talks to the
+two remote functions; the server derives everything else from your schema.
 
 ## New survey story in four files
 
