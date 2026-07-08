@@ -1,28 +1,52 @@
 import { describe, it, expect } from 'vitest';
-import { processValue, isValidField } from '../src/lib/stories/survey-story-1/data/survey.fields';
+import { makeCoercer, surveyFields } from '../src/lib/server/survey.core';
+import { darkDataSurvey } from '../src/lib/stories/survey-story-1/data/schema';
 
-describe('processValue', () => {
-	it('joins platformMatters array into a comma string', () => {
-		expect(processValue('platformMatters', ['Twitter', 'TikTok'])).toBe('Twitter,TikTok');
+// Exercise the derivation against the real story schema, mirroring the
+// defineSurvey call in survey-story-1's survey.remote.ts.
+const coerce = makeCoercer(darkDataSurvey, { consent: () => 1 });
+
+describe('coercion derived from the survey schema', () => {
+	it('joins checkbox arrays into a comma string', () => {
+		expect(coerce('platformMatters', ['Twitter', 'TikTok'])).toBe('Twitter,TikTok');
 	});
 	it('keeps socialMediaPrivacy as text', () => {
-		expect(processValue('socialMediaPrivacy', 'private')).toBe('private');
+		expect(coerce('socialMediaPrivacy', 'private')).toBe('private');
 	});
 	it('keeps age as text (does NOT parseInt)', () => {
-		expect(processValue('age', '18-24')).toBe('18-24');
+		expect(coerce('age', '18-24')).toBe('18-24');
 	});
 	it('coerces relativePreferences to int', () => {
-		expect(processValue('relativePreferences', '5')).toBe(5);
+		expect(coerce('relativePreferences', '5')).toBe(5);
 	});
 	it('coerces genderOrd to int', () => {
-		expect(processValue('genderOrd', '2')).toBe(2);
+		expect(coerce('genderOrd', '2')).toBe(2);
 	});
-	it('maps consent to 1', () => {
-		expect(processValue('consent', 'accepted')).toBe(1);
+	it('applies the per-field override: consent maps to 1', () => {
+		expect(coerce('consent', 'accepted')).toBe(1);
 	});
 });
 
-describe('isValidField', () => {
-	it('accepts a known field', () => expect(isValidField('age')).toBe(true));
-	it('rejects an unknown field', () => expect(isValidField('nope')).toBe(false));
+describe('fields derived from the survey schema', () => {
+	const fields = surveyFields(darkDataSurvey);
+
+	it('includes every answer column', () => {
+		expect(fields).toEqual(
+			expect.arrayContaining([
+				'consent',
+				'socialMediaPrivacy',
+				'platformMatters',
+				'relativePreferences',
+				'age',
+				'genderOrd',
+				'orientationOrd',
+				'raceOrd'
+			])
+		);
+	});
+	it('excludes the reserved columns', () => {
+		expect(fields).not.toContain('id');
+		expect(fields).not.toContain('fingerprint');
+		expect(fields).not.toContain('createdAt');
+	});
 });

@@ -28,7 +28,7 @@
 	],
 	"survey": [
 		{
-			"type": "question",
+			"type": "radio",
 			"value": {
 				"question": "Are your social media profiles typically public or private?",
 				"name": "socialMediaPrivacy",
@@ -40,11 +40,10 @@
 			}
 		},
 		{
-			"type": "question",
+			"type": "checkbox",
 			"value": {
 				"question": "Which social media platforms do you use? (multiple choices)",
 				"name": "platformMatters",
-				"multiple": true,
 				"options": [
 					{ "value": "Twitter", "label": "Twitter" },
 					{ "value": "Instagram", "label": "Instagram" },
@@ -55,7 +54,7 @@
 			}
 		},
 		{
-			"type": "question",
+			"type": "radio",
 			"value": {
 				"question": "How comfortable are you with sharing your personally identifiable data with a relative?",
 				"name": "relativePreferences",

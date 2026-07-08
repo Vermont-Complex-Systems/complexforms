@@ -1,11 +1,13 @@
-# VCSI custom research website template
+# Complex Forms
 
-```bash
-npx degit Vermont-Complex-Systems/vcsi-starter/templates/fresh example
-cd example
-```
+A platform to host dynamic web apps at the Vermont Complex Systems Institute, built with `sveltekit`, `better-auth` and drizzle.
 
-You can see this template live at [vcsi.cmplxsys.w3.uvm.edu](https://vcsi.cmplxsys.w3.uvm.edu/).
+## Features
+
+- Per-story database using [drizzle-better-sqlite3](https://orm.drizzle.team/docs/get-started-sqlite#better-sqlite3), making each story portable and fully modular.
+- Reusable survey components with remote functions to load the data into
+- Authentification using `better-auth`, also per-story
+
 
 ## Project Structure
 

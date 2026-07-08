@@ -1,66 +1,45 @@
 <script lang="ts">
-	import { generateFingerprint } from '$lib/utils/browserFingerprint.js';
 	import { StoryHeader, ScrollIndicator, RenderContent } from '@the-vcsi/scrolly-kit';
 	import Footer from '$lib/components/Footer.svelte';
 	import BackToHome from '$lib/components/helpers/BackToHome.svelte';
-	import ConsentPopup from './ConsentPopup.svelte';
 	import DemographicsBox from './DemographicsBox.svelte';
-	import SurveyScrolly from './SurveyScrolly.svelte';
-	import { saveAnswer as saveAnswerRemote, getSurveyResponse } from '../data/survey.remote.js';
-	import type { SurveyField } from '../data/schema';
+	import { ConsentPopup, SurveyScrolly, createSurveyClient } from '$lib/components/survey';
+	import * as remote from '../data/survey.remote.js';
 
-	let { story, data } = $props();
+	let { data } = $props();
 
-	let hasConsented = $state(false);
-	let checkingConsent = $state(true);
-	let userFingerprint = $state('');
-
-	let surveyAnswers: Partial<Record<SurveyField, string | string[]>> = $state({
-		socialMediaPrivacy: '',
-		platformMatters: [],
-		relativePreferences: '',
-		age: '',
-		genderOrd: '',
-		orientationOrd: '',
-		raceOrd: ''
+	// copy.json content is static, so capturing its initial value is intended.
+	// svelte-ignore state_referenced_locally
+	const survey = createSurveyClient(remote, {
+		questions: data.survey,
+		// Research story behind a consent gate: fingerprint dedup, and the same
+		// returning browser is recognized as already having consented.
+		identity: 'fingerprint'
 	});
 
-	async function checkExistingConsent() {
-		try {
-			userFingerprint = await generateFingerprint();
-			const survey = await getSurveyResponse(userFingerprint);
-			hasConsented = !!survey?.consent;
-		} catch (err) {
-			console.error('Failed to check existing consent:', err);
-		} finally {
-			checkingConsent = false;
-		}
-	}
-
-	$effect(() => {
-		checkExistingConsent();
-	});
+	let accepted = $state(false);
+	const hasConsented = $derived(accepted || !!survey.response?.consent);
 
 	async function handleConsentAccept() {
-		hasConsented = true;
+		accepted = true;
 		try {
-			userFingerprint ||= await generateFingerprint();
-			await saveAnswer('consent', 'accepted');
+			// Nothing is persisted server-side until this first save.
+			await survey.saveAnswer('consent', 'accepted');
 		} catch (err) {
 			console.error('Failed to save consent:', err);
 		}
 	}
-
-	// Plain function: it reads the $state `userFingerprint` at call time, so it
-	// always sees the latest value without needing $derived.
-	function saveAnswer(field: SurveyField, value: string | number | string[]) {
-		if (!userFingerprint) return Promise.resolve();
-		return saveAnswerRemote({ fingerprint: userFingerprint, field, value });
-	}
 </script>
 
-{#if !checkingConsent && !hasConsented}
-	<ConsentPopup onAccept={handleConsentAccept} {userFingerprint} {saveAnswer} />
+{#if !survey.loading && !hasConsented}
+	<ConsentPopup onAccept={handleConsentAccept}>
+		<p>This is an interactive data essay on privacy preferences and data sharing behaviors.</p>
+		<p>
+			As part of the story, we ask a few anonymous questions about privacy preferences and
+			demographics to inform the interactive story, and, conditional on consent, inform our ongoing
+			research on the topic.
+		</p>
+	</ConsentPopup>
 {/if}
 
 <BackToHome />
@@ -74,12 +53,12 @@
 	</section>
 
 	<section id="survey">
-		<SurveyScrolly items={data.survey} {userFingerprint} {saveAnswer} {surveyAnswers} />
+		<SurveyScrolly items={data.survey} bind:answers={survey.answers} saveAnswer={survey.saveAnswer} />
 	</section>
 
 	<section id="demographics" class="prose">
 		<RenderContent items={data.postSurvey} />
-		<DemographicsBox {userFingerprint} {saveAnswer} {surveyAnswers} />
+		<DemographicsBox bind:surveyAnswers={survey.answers} saveAnswer={survey.saveAnswer} />
 	</section>
 
 	<h2 class="prose">Appendix</h2>
@@ -98,12 +77,18 @@
 
 	/* The survey questions use dark text, so override the scrolly-kit step-box
 	   colors (consumed by ScrollyContent) to render light, readable boxes
-	   against the dark story background. Custom properties inherit into
-	   ScrollyContent's step boxes. */
+	   against the dark story background — and pin the shared survey-control
+	   tokens to the light boxes so they don't inherit the dark story theme.
+	   Custom properties inherit into ScrollyContent's step boxes. */
 	#survey {
 		--vcsi-story-step-bg: #ffffff;
 		--vcsi-story-step-fg: #333;
 		--vcsi-story-step-bg-inactive: #ededed;
 		--vcsi-story-step-fg-inactive: #888;
+		--vcsi-survey-fg: #333;
+		--vcsi-survey-muted: #666;
+		--vcsi-survey-border: #e0e0e0;
+		--vcsi-survey-control-bg: #fff;
+		--vcsi-survey-control-bg-muted: #f9f9f9;
 	}
 </style>

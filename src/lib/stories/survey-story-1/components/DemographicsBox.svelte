@@ -2,19 +2,18 @@
     import type { SurveyField } from '../data/schema';
 
     let {
-        userFingerprint,
         saveAnswer,
-        surveyAnswers
+        surveyAnswers = $bindable()
     }: {
-        userFingerprint: string;
         saveAnswer: (field: SurveyField, value: string | number | string[]) => Promise<unknown>;
         surveyAnswers: Partial<Record<SurveyField, string | string[]>>;
     } = $props();
 
-    // Save each field when changed
+    // Save each field when changed (saveAnswer itself waits until the survey
+    // client is ready, so no fingerprint guard is needed here).
     async function handleChange(field: SurveyField, value: string) {
         surveyAnswers[field] = value;
-        if (value !== '' && userFingerprint) {
+        if (value !== '') {
             await saveAnswer(field, value);
         }
     }

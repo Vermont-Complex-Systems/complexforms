@@ -1,13 +1,10 @@
 import { defineSurvey } from '$lib/server/survey';
-import { darkDataSurvey } from './schema';
+import { EmbeddingSurvey } from './schema';
 
 const survey = defineSurvey({
-	table: darkDataSurvey,
-	dbPath: 'src/lib/stories/survey-story-1/data/survey.db',
-	// PM2 prod + .env already set DATABASE_URL (to this same path).
-	envKey: 'DATABASE_URL',
-	// Whatever value the consent flow sends, store the flag as 1.
-	coerce: { consent: () => 1 }
+	table: EmbeddingSurvey,
+	dbPath: 'src/lib/stories/embedding-survey/data/survey.db',
+	envKey: 'EMBEDDING_SURVEY_DB_URL'
 });
 
 // Remote functions must be exported from a .remote.ts file — this re-export

@@ -1,0 +1,33 @@
+{
+	"title": "Embedding Survey",
+	"subtitle": "Which embedding space works best for exploring the poster & talk topic space?",
+	"authors": [
+		{
+			"name": "Author Name",
+			"url": ""
+		}
+	],
+	"date": "Jul 8, 2026",
+	"survey": [
+		{
+			"type": "select",
+			"value": {
+				"question": "Which is your favorite embedding space to navigate the poster/talk topic space?",
+				"name": "favEmbedding",
+				"options": [
+					{ "value": "qwen3_evoc", "label": "Qwen3-Embedding-0.6B / evoc" },
+					{ "value": "qwen3_umap", "label": "Qwen3-Embedding-0.6B / umap" },
+					{ "value": "all_minilm_l6_v2", "label": "all-MiniLM-L6-v2 / evoc" }
+				]
+			}
+		},
+		{
+			"type": "text",
+			"value": {
+				"question": "Why? What makes it work for you?",
+				"name": "reason",
+				"placeholder": "Share your reasoning…"
+			}
+		}
+	]
+}
