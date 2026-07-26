@@ -3,6 +3,7 @@
 	import type { SaveAnswer, SurveyOption } from './types';
 	import { createSaver } from './saver.svelte';
 	import SaveFeedback from './SaveFeedback.svelte';
+	import QuestionText from './QuestionText.svelte';
 
 	let {
 		question,
@@ -22,9 +23,7 @@
 </script>
 
 <div class="radio-question">
-	<div class="question-text">
-		<h3>{question}</h3>
-	</div>
+	<QuestionText {question} />
 	<div class="survey-controls">
 		<RadioGroup.Root
 			bind:value
@@ -46,18 +45,6 @@
 <style>
 	.radio-question {
 		width: 100%;
-	}
-
-	.question-text {
-		text-align: center;
-		margin-bottom: 1rem;
-	}
-
-	.question-text h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.2rem;
-		font-weight: var(--vcsi-font-weight-semibold, 600);
-		color: var(--vcsi-survey-fg, var(--vcsi-fg, #333));
 	}
 
 	/* bits-ui renders these classes on its own elements, so they need :global —
@@ -136,11 +123,5 @@
 		cursor: pointer;
 		user-select: none;
 		color: var(--vcsi-survey-fg, var(--vcsi-fg, #333));
-	}
-
-	@media (max-width: 640px) {
-		.question-text h3 {
-			font-size: 1.3rem;
-		}
 	}
 </style>

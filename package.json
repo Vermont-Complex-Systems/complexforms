@@ -12,6 +12,11 @@
     "db:push": "drizzle-kit push",
     "db:push:story": "drizzle-kit push --config drizzle.story.config.ts",
     "db:generate": "drizzle-kit generate",
+    "seed:demo": "node scripts/seed-demo.mjs",
+    "gen:qr": "node scripts/gen-qr.mjs",
+    "attendee": "node scripts/attendee.mjs",
+    "reset-accounts": "node scripts/attendee.mjs wipe",
+    "leaderboard": "node scripts/leaderboard.mjs",
     "test": "vitest run"
   },
   "devDependencies": {
@@ -20,6 +25,7 @@
     "@sveltejs/kit": "^2.65.1",
     "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "@types/better-sqlite3": "^7.6.13",
+    "@types/qrcode": "^1.5.6",
     "drizzle-kit": "^0.31.10",
     "svelte": "^5.56.3",
     "svelte-check": "^4.4.0",
@@ -40,6 +46,7 @@
     "d3-interpolate": "^3.0.1",
     "drizzle-orm": "^0.45.2",
     "mode-watcher": "^1.1.0",
+    "qrcode": "^1.5.4",
     "svelte-meta-tags": "^5.0.1",
     "svelteplot": "^0.14.2",
     "valibot": "^1.2.0"

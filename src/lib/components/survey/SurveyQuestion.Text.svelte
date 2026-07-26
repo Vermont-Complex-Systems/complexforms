@@ -2,6 +2,7 @@
 	import type { SaveAnswer } from './types';
 	import { createSaver } from './saver.svelte';
 	import SaveFeedback from './SaveFeedback.svelte';
+	import QuestionText from './QuestionText.svelte';
 
 	let {
 		question,
@@ -30,9 +31,7 @@
 </script>
 
 <div class="text-question">
-	<div class="question-text">
-		<h3>{question}</h3>
-	</div>
+	<QuestionText {question} />
 	<!-- Free text needs an explicit submit: unlike a select/radio there is no
 	     obvious "change" moment, and a silent blur-save is undiscoverable. -->
 	<textarea {name} {placeholder} rows="4" bind:value {onkeydown}></textarea>
@@ -52,18 +51,6 @@
 <style>
 	.text-question {
 		width: 100%;
-	}
-
-	.question-text {
-		text-align: center;
-		margin-bottom: 1rem;
-	}
-
-	.question-text h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.2rem;
-		font-weight: var(--vcsi-font-weight-semibold, 600);
-		color: var(--vcsi-survey-fg, var(--vcsi-fg, #333));
 	}
 
 	textarea {
@@ -125,11 +112,5 @@
 	.actions button:disabled {
 		opacity: 0.6;
 		cursor: default;
-	}
-
-	@media (max-width: 640px) {
-		.question-text h3 {
-			font-size: 1.3rem;
-		}
 	}
 </style>

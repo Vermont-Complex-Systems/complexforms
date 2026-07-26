@@ -1,0 +1,489 @@
+[
+  {
+    "day": "Day 1",
+    "date": "Tuesday, July 28 — Tutorial Day",
+    "events": [
+      {
+        "time": "7:30–9:00",
+        "title": "Registration and Coffee",
+        "type": "registration",
+        "location": "Davis Center, 4th floor"
+      },
+      {
+        "time": "9:00–10:30",
+        "title": "Morning Tutorials",
+        "type": "tutorial",
+        "tutorials": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "time": "10:30–10:45",
+        "title": "Break / Coffee",
+        "type": "break"
+      },
+      {
+        "time": "10:45–12:15",
+        "title": "Tutorials continue",
+        "type": "tutorial"
+      },
+      {
+        "time": "12:15–13:15",
+        "title": "Lunch",
+        "type": "lunch"
+      },
+      {
+        "time": "13:15–14:45",
+        "title": "Afternoon Tutorials",
+        "type": "tutorial",
+        "tutorials": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "time": "14:45–15:00",
+        "title": "Break / Coffee",
+        "type": "break"
+      },
+      {
+        "time": "15:00–16:30",
+        "title": "Tutorials continue",
+        "type": "tutorial"
+      },
+      {
+        "time": "16:30–17:30",
+        "title": "Welcome Reception",
+        "type": "social",
+        "location": "Davis Center, Grand Maple ballroom"
+      }
+    ]
+  },
+  {
+    "day": "Day 2",
+    "date": "Wednesday, July 29",
+    "events": [
+      {
+        "time": "8:00–8:45",
+        "title": "Registration and Coffee",
+        "type": "registration",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "8:45–9:00",
+        "title": "Welcoming Remarks",
+        "type": "remarks",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Dodds & Foucault-Welles"
+      },
+      {
+        "time": "9:00–9:45",
+        "title": "“Understanding AI: Humans and Society” — Plenary Lightning Talks",
+        "type": "lightning",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Juniper Lovato",
+        "items": [
+          {
+            "time": "9:00",
+            "title": "Biased AI Enhances Human Decision-Making But Reduces Trust",
+            "presenters": "Shiyang Lai, Junsol Kim, Nadav Kunievsky, Yujin Potter and James Evans"
+          },
+          {
+            "time": "9:07",
+            "title": "Effects of network connectivity and functional diversity distribution on human collective ideation",
+            "presenters": "Yiding Cao, Yingjun Dong, Minjun Kim, Neil MacLaren, Sriniwas Pandey, Shelley Dionne, Francis Yammarino and Hiroki Sayama"
+          },
+          {
+            "time": "9:14",
+            "title": "Tokens, the oft-overlooked appetizer: Large language models, the distributional hypothesis, and meaning",
+            "presenters": "Julia Zimmerman"
+          },
+          {
+            "time": "9:21",
+            "title": "Friendship Modulates the Expression of Hierarchy in Cooperation",
+            "presenters": "Melanie Oyarzún, Carlos Rodriguez-Sickert and Cristian Candia"
+          },
+          {
+            "time": "9:28",
+            "title": "Stress-testing Generative AI in High-Stakes Policy Settings: Evidence from Race-Blind Charging in California",
+            "presenters": "Muskan Walia, Joe Nudell and Alex Chohlas-Wood"
+          },
+          {
+            "time": "9:35",
+            "title": "Generative AI Search Reflects Information Inequality while Masking Source Quality",
+            "presenters": "Marianne Aubin Le Quere, Isabel Corpus, Stephen Dong and Mor Naaman"
+          }
+        ]
+      },
+      {
+        "time": "9:45–10:30",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Brooke Foucault-Welles",
+        "speakers": [
+          "Derek Curry",
+          "Jennifer Gradecki"
+        ]
+      },
+      {
+        "time": "10:30–10:45",
+        "title": "Coffee Break",
+        "type": "break",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "10:45–12:15",
+        "title": "Parallel Sessions",
+        "type": "parallel",
+        "parallelSessions": [
+          "AI in Education",
+          "Algorithmic Systems",
+          "Cultural Dynamics, Beliefs, and Narratives",
+          "Health, Wellbeing, and Stigma (1)",
+          "Mobility, Urban Science, and Demography (Cities and Neighborhoods)",
+          "Science of Science (AI)",
+          "Social Good & Ethics",
+          "Understanding Large Language Models (AI & Society)"
+        ]
+      },
+      {
+        "time": "12:15–13:15",
+        "title": "Lunch",
+        "type": "lunch",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "13:15–14:15",
+        "title": "Poster Session 1",
+        "type": "poster",
+        "location": "Davis Center"
+      },
+      {
+        "time": "14:15–15:45",
+        "title": "Parallel Sessions",
+        "type": "parallel",
+        "parallelSessions": [
+          "Cultural Dynamics, Beliefs, and Narratives (Collective Behavior and Sociology of Culture)",
+          "Human-AI Interaction and Practice (1)",
+          "Identity and Media Representation",
+          "Mobility, Urban Science, and Demography (1)",
+          "Political Polarization and Discourse (History and Geography)",
+          "Science of Science (Demographic Gaps)",
+          "Social Media Platforms and Online Communities (AI & Digital Harm)",
+          "Understanding Large Language Models (Explainability & Cognition)"
+        ]
+      },
+      {
+        "time": "15:45–16:00",
+        "title": "Coffee Break",
+        "type": "break",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "16:00–16:45",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Alexa Woodward",
+        "speakers": [
+          "Gašper Beguš"
+        ]
+      },
+      {
+        "time": "16:45–17:30",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Juniper Lovato",
+        "speakers": [
+          "Jan Eisfeldt"
+        ]
+      }
+    ]
+  },
+  {
+    "day": "Day 3",
+    "date": "Thursday, July 30",
+    "events": [
+      {
+        "time": "8:00–9:00",
+        "title": "Registration and Coffee",
+        "type": "registration",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "9:00–9:45",
+        "title": "“Politics, Policy, and Governance” — Plenary Lightning Talks",
+        "type": "lightning",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Sam Zhang",
+        "items": [
+          {
+            "time": "9:00",
+            "title": "Mobility behavior moderates residential partisan segregation in US metropolitan areas",
+            "presenters": "Marco Tonin, Michele Tizzoni, Bruno Lepri and Esteban Moro"
+          },
+          {
+            "time": "9:07",
+            "title": "Resilience of Labor Markets Under the COVID-19 Shock: The Role of Job Connectivity",
+            "presenters": "Wendi Li, Esteban Moro, Yong-Yeol Ahn and Morgan Frank"
+          },
+          {
+            "time": "9:14",
+            "title": "Modeling feedback between institutional signals and social norms",
+            "presenters": "Ekaterina Landgren, Madalina Vlasceanu and Sara Constantino"
+          },
+          {
+            "time": "9:21",
+            "title": "Pricing Job Priorities in US Coal Communities",
+            "presenters": "Junghyun Lim, Arezou Farzaneh, Shanti Gamper-Rabindran, Morgan R. Frank and Michaël Aklin"
+          },
+          {
+            "time": "9:28",
+            "title": "Falsehoods Offer No Persuasive Advantage Over Selective Facts: Evidence from Real-World Political Misinformation",
+            "presenters": "Jennifer Allen, David Rothschild, Duncan Watts, Amir Tohidi and Samar Haider"
+          },
+          {
+            "time": "9:35",
+            "title": "TikTok’s recommendations skewed toward oppositional and Republican-aligned content during the 2024 U.S. elections",
+            "presenters": "Hazem Ibrahim, Daniel Jang, Nouar Aldahoul, Aaron Kaufman, Talal Rahwan and Yasir Zaki"
+          }
+        ]
+      },
+      {
+        "time": "9:45–10:30",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Mirta Galesic",
+        "speakers": [
+          "Rafael Prieto-Curiel"
+        ]
+      },
+      {
+        "time": "10:30–10:45",
+        "title": "Coffee Break",
+        "type": "break",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "10:45–12:15",
+        "title": "Parallel Sessions",
+        "type": "parallel",
+        "parallelSessions": [
+          "Climate, Environment, and Behavior",
+          "Human-AI Interaction and Practice (2)",
+          "Methods and Measurement (1)",
+          "Misinformation, Conspiracy, and Information Integrity (1)",
+          "Mobility, Urban Science, and Demography (2)",
+          "Social Media Platforms and Online Communities (1)",
+          "Cultural Dynamics, Beliefs, and Narratives (Computational Psychology and History)",
+          "Understanding Large Language Models (Bias)"
+        ]
+      },
+      {
+        "time": "12:15–13:15",
+        "title": "Lunch",
+        "type": "lunch",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "13:15–14:15",
+        "title": "Poster Session 2",
+        "type": "poster",
+        "location": "Davis Center"
+      },
+      {
+        "time": "14:15–15:45",
+        "title": "Parallel Sessions",
+        "type": "parallel",
+        "parallelSessions": [
+          "Cultural Dynamics, Beliefs, and Narratives (Networks)",
+          "Governance & Policy (1)",
+          "Labor, Work, and the Future of AI Employment (1)",
+          "Methods and Measurement (2)",
+          "Misinformation, Conspiracy, and Information Integrity (2)",
+          "Mobility, Urban Science, and Demography (3)",
+          "Science of Science (Innovation)",
+          "Social Media Platforms and Online Communities (2)"
+        ]
+      },
+      {
+        "time": "15:45–16:00",
+        "title": "Coffee Break",
+        "type": "break",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "16:00–16:45",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Chris Danforth",
+        "speakers": [
+          "Katy Milkman"
+        ]
+      },
+      {
+        "time": "16:45–17:30",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Tim Tangherlini",
+        "speakers": [
+          "Kate Starbird"
+        ]
+      },
+      {
+        "time": "18:00",
+        "title": "Conference Dinner",
+        "type": "social",
+        "location": "ECHO"
+      }
+    ]
+  },
+  {
+    "day": "Day 4",
+    "date": "Friday, July 31",
+    "events": [
+      {
+        "time": "8:00–9:00",
+        "title": "Registration and Coffee",
+        "type": "registration",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "9:00–9:45",
+        "title": "“Equity and Health” — Plenary Lightning Talks",
+        "type": "lightning",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Michelle Morgenstern",
+        "items": [
+          {
+            "time": "9:00",
+            "title": "Disparate Attrition of Global South Authors Following Manuscript Rejection",
+            "presenters": "Hong Chen, Chris Rider, David Jurgens and Misha Teplitskiy"
+          },
+          {
+            "time": "9:07",
+            "title": "Personalized Recommendations without Inducing Congestion: Mitigating Disparities in the NYC High School Match",
+            "presenters": "Erica Chiang, Kenny Peng, Rebecca Lichtenstein, Kristen O'Neil, Lianna Wright, Jon Kleinberg, Eva Tardos and Nikhil Garg"
+          },
+          {
+            "time": "9:14",
+            "title": "Nature experiences improve mood and sleep in a large longitudinal study of well-being using the Oura ring",
+            "presenters": "Chris Danforth"
+          },
+          {
+            "time": "9:21",
+            "title": "The Religious Radio Corpus: Building a Large-Scale Dataset of American Faith Broadcasting",
+            "presenters": "Samuel Bestvater, Athena Chapekis, Skyler Seets and Sono Shah"
+          },
+          {
+            "time": "9:28",
+            "title": "Mobility Measurement and Network Structure Shape Mortality Inequalities in Epidemic Simulations",
+            "presenters": "Jordan Klein"
+          },
+          {
+            "time": "9:35",
+            "title": "Reaching a Self-Sustaining Equilibrium: Modeling the Critical Mass in Open Online Collaboration",
+            "presenters": "Jianghui Li and Nathan Teblunthuis"
+          }
+        ]
+      },
+      {
+        "time": "9:45–10:30",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Juniper Lovato",
+        "speakers": [
+          "Kyle Mahowald"
+        ]
+      },
+      {
+        "time": "10:30–10:45",
+        "title": "Coffee Break",
+        "type": "break",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "10:45–12:15",
+        "title": "Parallel Sessions",
+        "type": "parallel",
+        "parallelSessions": [
+          "Cultural Dynamics, Beliefs, and Narratives (Words and Narrative)",
+          "Education and Student Outcomes (1)",
+          "Labor, Work, and the Future of AI Employment (2)",
+          "Network Science",
+          "Political Polarization and Discourse (Dynamics and Platform 1)",
+          "Political Polarization and Discourse (Politics)",
+          "Science of Science (1)",
+          "Understanding Large Language Models (Surveys & Social Science 1)"
+        ]
+      },
+      {
+        "time": "12:15–13:15",
+        "title": "Lunch",
+        "type": "lunch",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "13:15–14:15",
+        "title": "Poster Session 3",
+        "type": "poster",
+        "location": "Davis Center"
+      },
+      {
+        "time": "14:15–15:45",
+        "title": "Parallel Sessions",
+        "type": "parallel",
+        "parallelSessions": [
+          "Education and Student Outcomes (2)",
+          "Governance & Policy (2)",
+          "Health, Wellbeing, and Stigma (2)",
+          "Methods and Measurement (Surveys)",
+          "News, Media, and Information Ecosystems",
+          "Political Polarization and Discourse (Dynamics and Platform 2)",
+          "Science of Science (2)",
+          "Understanding Large Language Models (Surveys & Social Science 2)"
+        ]
+      },
+      {
+        "time": "15:45–16:00",
+        "title": "Coffee Break",
+        "type": "break",
+        "location": "Davis Center, 4th Floor"
+      },
+      {
+        "time": "16:00–16:45",
+        "title": "Keynote",
+        "type": "keynote",
+        "location": "Grand Maple Ballroom",
+        "chairs": "Alexa Woodward",
+        "speakers": [
+          "Jonathan Gilmour"
+        ]
+      },
+      {
+        "time": "16:45–17:30",
+        "title": "Closing Remarks",
+        "type": "remarks",
+        "items": [
+          {
+            "title": "Final slides, awards, location announcement for next year",
+            "presenters": "Danforth, Dodds, Watts"
+          }
+        ]
+      }
+    ]
+  }
+]
