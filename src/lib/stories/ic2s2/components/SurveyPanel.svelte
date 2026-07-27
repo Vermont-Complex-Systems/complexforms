@@ -60,4 +60,11 @@
 		max-width: 40rem;
 		margin: 0 auto;
 	}
+
+	/* Story-scoped: left-align the (shared, normally-centered) question prompt in
+	   this panel. :global() reaches the child QuestionText's element, but only
+	   within THIS panel's .survey — the standalone embedding-survey is unaffected. */
+	.survey :global(.question-text) {
+		text-align: left;
+	}
 </style>
