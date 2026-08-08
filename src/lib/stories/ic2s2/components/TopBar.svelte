@@ -7,12 +7,16 @@
 
 	let {
 		user,
+		isAdmin = false,
 		onLogin,
-		onAccount
+		onAccount,
+		onStats
 	}: {
 		user: { name: string } | null;
+		isAdmin?: boolean;
 		onLogin: () => void;
 		onAccount: () => void;
+		onStats: () => void;
 	} = $props();
 
 	function initials(name: string) {
@@ -37,10 +41,15 @@
 		</a>
 
 		{#if user}
-			<button class="account" onclick={onAccount} aria-label="Account: {user.name}">
-				<span class="name">{user.name}</span>
-				<span class="avatar">{initials(user.name)}</span>
-			</button>
+			<div class="right">
+				{#if isAdmin}
+					<button class="admin" onclick={onStats} title="Organizer dashboard">📊 Stats</button>
+				{/if}
+				<button class="account" onclick={onAccount} aria-label="Account: {user.name}">
+					<span class="name">{user.name}</span>
+					<span class="avatar">{initials(user.name)}</span>
+				</button>
+			</div>
 		{:else}
 			<button class="login" onclick={onLogin}>Log in</button>
 		{/if}
@@ -116,6 +125,35 @@
 	}
 	:global(.dark) .logo-dark {
 		display: block;
+	}
+
+	.right {
+		display: flex;
+		align-items: center;
+		gap: var(--vcsi-space-md);
+	}
+
+	.admin {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: var(--vcsi-space-xs) var(--vcsi-space-md);
+		border: 1px solid var(--vcsi-border);
+		border-radius: var(--vcsi-radius-full);
+		background: var(--vcsi-bg);
+		color: var(--vcsi-muted);
+		font-family: inherit;
+		font-size: var(--vcsi-font-size-xs);
+		font-weight: var(--vcsi-font-weight-semibold);
+		white-space: nowrap;
+		cursor: pointer;
+		transition:
+			color var(--vcsi-transition-base),
+			border-color var(--vcsi-transition-base);
+	}
+	.admin:hover {
+		color: var(--ic2s2-coral, var(--vcsi-color-accent));
+		border-color: var(--ic2s2-coral, var(--vcsi-color-accent));
 	}
 
 	.account {

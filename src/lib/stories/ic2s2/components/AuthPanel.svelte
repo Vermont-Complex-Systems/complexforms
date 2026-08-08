@@ -39,6 +39,11 @@
 		Use the email you registered for IC2S2 with — no password needed. First time in sets up your account.
 		The display name is optional — you can set or change it any time from your account.
 	</p>
+	<p class="hint">
+		Can't get in? <strong>Try your institutional and personal email addresses first</strong> — you may have
+		registered with a different one. Still stuck? Email
+		<a href="mailto:jstonge1@uvm.edu">jstonge1@uvm.edu</a>.
+	</p>
 </div>
 
 <style>
@@ -52,5 +57,7 @@
 	button.primary { padding: var(--vcsi-space-sm); border: none; border-radius: var(--vcsi-radius-md); background: var(--ic2s2-coral, var(--vcsi-color-accent)); color: #fff; font-weight: var(--vcsi-font-weight-semibold); cursor: pointer; }
 	button.primary:disabled { opacity: 0.6; }
 	.hint { color: var(--vcsi-muted); font-size: var(--vcsi-font-size-xs); margin-top: var(--vcsi-space-sm); }
+	.hint strong { color: var(--vcsi-fg); font-weight: var(--vcsi-font-weight-semibold); }
+	.hint a { color: var(--ic2s2-coral, var(--vcsi-color-accent)); }
 	.error { color: #b00020; font-size: var(--vcsi-font-size-xs); margin: 0; }
 </style>

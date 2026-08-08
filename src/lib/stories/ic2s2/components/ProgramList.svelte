@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FilterBar from './FilterBar.svelte';
-	import { getProgram, getMyVotes, getVotingWindows, castVote } from '../data/data.remote';
+	import { getProgram, getMyVotes, getVotingStatus, castVote } from '../data/data.remote';
 
 	type FilterType = 'parallel' | 'lightning' | 'posters';
 
@@ -10,38 +10,60 @@
 	// own pick updates on its own. Tallies are never sent to attendees (by account).
 	const programQ = getProgram();
 	const myVotesQ = getMyVotes();
-	const windowsQ = getVotingWindows();
+	const statusQ = getVotingStatus();
 
 	const program = $derived(programQ.current ?? []);
 	const mine = $derived(new Set(myVotesQ.current ?? []));
-	const windows = $derived(windowsQ.current ?? {});
+	const status = $derived(statusQ.current);
+	const open = $derived(!!status?.open);
 	const notReady = $derived(programQ.current === undefined);
-
-	const isOpen = (day: string | null) => !!(day && windows[day]?.open);
 
 	let filterType = $state<FilterType>('parallel');
 	let searchQuery = $state('');
 	let voteError = $state('');
 
+	const wantKind = $derived(
+		filterType === 'parallel' ? 'talk' : filterType === 'lightning' ? 'lightning' : 'poster'
+	);
+	const kindLabel = $derived(
+		wantKind === 'talk' ? 'parallel-talk' : wantKind === 'lightning' ? 'lightning-talk' : 'poster'
+	);
+
+	// Your picks in the ACTIVE category, across all days — just a counter,
+	// votes are unlimited.
+	const kindById = $derived(new Map(program.map((p) => [p.id, p.kind])));
+	const usedInKind = $derived([...mine].filter((id) => kindById.get(id) === wantKind).length);
+
+	// A non-empty search spans the WHOLE program (every day + every type) so you
+	// can find a talk without knowing where it lives; the pills/day tab only
+	// scope browsing when the search box is empty.
+	const searching = $derived(searchQuery.trim().length > 0);
 	const results = $derived.by(() => {
 		const q = searchQuery.trim().toLowerCase();
-		const wantKind =
-			filterType === 'parallel' ? 'talk' : filterType === 'lightning' ? 'lightning' : 'poster';
 		return program
 			.filter((p) => {
-				if (p.kind !== wantKind) return false;
-				if (p.day !== selectedDate) return false;
-				if (q) {
-					const hay = `${p.title} ${p.authors ?? ''} ${p.id} ${p.theme ?? ''} ${p.sessionTitle ?? ''}`.toLowerCase();
-					if (!hay.includes(q)) return false;
-				}
-				return true;
+				if (!q) return p.kind === wantKind && p.day === selectedDate;
+				const hay = `${p.title} ${p.authors ?? ''} ${p.id} ${p.theme ?? ''} ${p.sessionTitle ?? ''}`.toLowerCase();
+				return hay.includes(q);
 			})
 			.sort(
 				(a, b) =>
-					(a.session ?? '').localeCompare(b.session ?? '') || a.title.localeCompare(b.title)
+					(a.day ?? '').localeCompare(b.day ?? '') ||
+					(a.session ?? '').localeCompare(b.session ?? '') ||
+					a.title.localeCompare(b.title)
 			);
 	});
+
+	const DAY_SHORT: Record<string, string> = {
+		'2026-07-29': 'Wed',
+		'2026-07-30': 'Thu',
+		'2026-07-31': 'Fri'
+	};
+	const KIND_SHORT: Record<string, string> = {
+		talk: 'Parallel',
+		lightning: 'Lightning',
+		poster: 'Poster'
+	};
 
 	async function vote(id: string) {
 		voteError = '';
@@ -54,6 +76,14 @@
 </script>
 
 <FilterBar bind:filterType bind:searchQuery resultCount={results.length} />
+
+<p class="picks">
+	{#if searching}
+		★ {mine.size} {mine.size === 1 ? 'pick' : 'picks'} · searching all days &amp; categories
+	{:else}
+		★ {usedInKind} {kindLabel} {usedInKind === 1 ? 'pick' : 'picks'}
+	{/if}
+</p>
 
 {#if voteError}<p class="error">{voteError}</p>{/if}
 
@@ -68,14 +98,14 @@
 				<button
 					class="vote"
 					class:voted={mine.has(it.id)}
-					disabled={!isOpen(it.day)}
+					disabled={!open}
 					onclick={() => vote(it.id)}
 					aria-pressed={mine.has(it.id)}
-					title={!isOpen(it.day)
-						? 'Voting is not open for this day'
+					title={!open
+						? (status?.label ?? 'Voting is not open')
 						: mine.has(it.id)
 							? 'Your pick — click to clear'
-							: 'Pick as best'}
+							: 'Star as a favorite'}
 				>
 					★
 				</button>
@@ -83,6 +113,9 @@
 					<div class="title">{it.title}</div>
 					{#if it.authors}<div class="authors">{it.authors}</div>{/if}
 					<div class="badges">
+						{#if searching}
+							<span class="tag">{DAY_SHORT[it.day ?? ''] ?? 'TBD'} · {KIND_SHORT[it.kind] ?? it.kind}</span>
+						{/if}
 						{#if it.sessionTitle}<span class="tag subtle">{it.sessionTitle}</span>{/if}
 						{#if it.kind === 'poster' && it.theme}<span class="tag subtle">{it.theme}</span>{/if}
 					</div>
@@ -93,6 +126,7 @@
 {/if}
 
 <style>
+	.picks { margin: 0 0 var(--vcsi-space-sm); font-size: var(--vcsi-font-size-xs); font-weight: var(--vcsi-font-weight-medium); color: var(--vcsi-muted); }
 	.error { color: #b00020; font-size: var(--vcsi-font-size-xs); margin: var(--vcsi-space-sm) 0 0; }
 	.cards { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--vcsi-space-sm); }
 	.cards li { padding: var(--vcsi-space-sm) var(--vcsi-space-md); border: 1px solid var(--vcsi-border); border-radius: var(--vcsi-radius-lg); }

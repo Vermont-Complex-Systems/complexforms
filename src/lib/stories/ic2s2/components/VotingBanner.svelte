@@ -1,18 +1,16 @@
 <script lang="ts">
-	import { getVotingWindows } from '../data/data.remote';
-
-	let { date, label }: { date: string; label: string } = $props();
+	import { getVotingStatus } from '../data/data.remote';
 
 	// Reactive query (only rendered when logged in, so it's authorized).
-	const windows = getVotingWindows();
-	const w = $derived(windows.current?.[date]);
+	const statusQ = getVotingStatus();
+	const s = $derived(statusQ.current);
 </script>
 
-{#if w}
-	<div class="banner" class:open={w.open}>
+{#if s}
+	<div class="banner" class:open={s.open}>
 		<div class="banner-inner">
 			<span class="dot"></span>
-			<span><strong>{label}</strong> · {w.label} · one pick per category</span>
+			<span><strong>{s.label}</strong> · star as many favorites as you like, any day</span>
 		</div>
 	</div>
 {/if}

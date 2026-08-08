@@ -4,8 +4,16 @@ import { env } from '$env/dynamic/private';
 import * as v from 'valibot';
 import { and, desc, eq, sql } from 'drizzle-orm';
 import { db } from './db';
-import { confTalks, confVotes, huntObjects, huntFinds, user, attendeeProfiles } from './schema';
-import { CONF_DAYS, isVotingOpen, votingStatus } from './voting';
+import {
+	confTalks,
+	confVotes,
+	confVoteEvents,
+	huntObjects,
+	huntFinds,
+	user,
+	attendeeProfiles
+} from './schema';
+import { isVotingOpen, votingStatus } from './voting';
 import { verifyToken } from './hunt-token.js';
 
 // Guard for the app's data: everything except getCurrentUser requires an
@@ -84,7 +92,7 @@ export const getProgram = query(async () => {
 		.all();
 });
 
-// The item ids the current attendee has picked (at most one per day+category).
+// The item ids the current attendee has starred (any number, one per item).
 export const getMyVotes = query(async () => {
 	const attendee = requireAttendee();
 	return db
@@ -95,21 +103,20 @@ export const getMyVotes = query(async () => {
 		.map((r) => r.talkId);
 });
 
-// Voting-window status for each program day, so the UI can enable/disable and
+// The single conference-wide voting window, so the UI can enable/disable and
 // show a banner.
-export const getVotingWindows = query(async () => {
+export const getVotingStatus = query(async () => {
 	requireAttendee();
-	const out: Record<string, { open: boolean; label: string }> = {};
-	for (const d of CONF_DAYS) out[d] = votingStatus(d);
-	return out;
+	return votingStatus();
 });
 
-// Cast (or move / clear) your single best-of pick for the item's day+category.
-// Re-picking the same item clears it; picking another in the same category moves
-// your vote. Enforced by the unique(user, day, category) constraint + the window.
-// Single-flight: the client's getMyVotes() is refreshed with the response.
+// Toggle a favorite. Votes are unlimited — star as many items as you like, at
+// most once each (the unique(user, talkId) constraint); re-picking a starred
+// item clears it. Single-flight: the client's getMyVotes() is refreshed with
+// the response.
 export const castVote = command(v.string(), async (talkId) => {
 	const userId = requireAttendee().id;
+	if (!isVotingOpen()) throw new Error('Voting is not open right now.');
 
 	const item = db
 		.select({ day: confTalks.day, kind: confTalks.kind })
@@ -118,21 +125,19 @@ export const castVote = command(v.string(), async (talkId) => {
 		.get();
 	if (!item) throw new Error('Unknown item.');
 	if (!item.day) throw new Error('This item is not scheduled on a day yet.');
-	if (!isVotingOpen(item.day)) throw new Error('Voting is not open right now.');
 
-	const { day, kind: category } = item;
 	const existing = db
-		.select({ id: confVotes.id, talkId: confVotes.talkId })
+		.select({ id: confVotes.id })
 		.from(confVotes)
-		.where(and(eq(confVotes.userId, userId), eq(confVotes.day, day), eq(confVotes.category, category)))
+		.where(and(eq(confVotes.userId, userId), eq(confVotes.talkId, talkId)))
 		.get();
 
-	if (existing && existing.talkId === talkId) {
+	if (existing) {
 		db.delete(confVotes).where(eq(confVotes.id, existing.id)).run();
-	} else if (existing) {
-		db.update(confVotes).set({ talkId }).where(eq(confVotes.id, existing.id)).run();
+		db.insert(confVoteEvents).values({ talkId, userId, action: 'unvote' }).run();
 	} else {
-		db.insert(confVotes).values({ talkId, userId, day, category }).run();
+		db.insert(confVotes).values({ talkId, userId, day: item.day, category: item.kind }).run();
+		db.insert(confVoteEvents).values({ talkId, userId, action: 'vote' }).run();
 	}
 
 	void getMyVotes().refresh(); // only the user's own pick changes; the program (no tallies) doesn't

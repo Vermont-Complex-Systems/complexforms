@@ -29,7 +29,7 @@
 
 <div class="search">
 	<span class="icon"><Search size={16} /></span>
-	<input type="text" placeholder="Search title, author, ID…" bind:value={searchQuery} />
+	<input type="text" placeholder="Search the whole program — title, author, ID…" bind:value={searchQuery} />
 </div>
 
 <style>

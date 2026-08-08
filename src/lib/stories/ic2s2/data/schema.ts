@@ -94,6 +94,10 @@ export const attendees = sqliteTable('attendees', {
 	id: integer('id').primaryKey({ autoIncrement: true }),
 	email: text('email').notNull().unique(),
 	name: text('name'),
+	// 'organizer' unlocks the hidden /ic2s2/stats dashboard (admin.remote.ts).
+	// Lives here, not on `user`: resetting a login deletes the user row, and a
+	// privilege should survive that. Granted via scripts/attendee.mjs grant.
+	role: text('role'),
 	claimedAt: text('claimed_at'),
 	createdAt: text('created_at').default(sql`(CURRENT_TIMESTAMP)`)
 });
@@ -117,9 +121,10 @@ export const confTalks = sqliteTable('conf_talks', {
 	createdAt: text('created_at').default(sql`(CURRENT_TIMESTAMP)`)
 });
 
-// Best-of voting: each attendee picks ONE best item per (day, category). `day`
-// and `category` are denormalized from the item so the unique constraint can
-// enforce the single pick. category = the item's kind ('talk'|'poster'|'lightning').
+// Best-of voting: each attendee distributes 3 picks per category across the
+// whole conference (cap enforced in castVote), at most one per item (unique
+// below). `day` and `category` are denormalized from the item for the cap
+// query and tallies. category = the item's kind ('talk'|'poster'|'lightning').
 export const confVotes = sqliteTable(
 	'conf_votes',
 	{
@@ -134,7 +139,29 @@ export const confVotes = sqliteTable(
 		category: text('category').notNull(),
 		createdAt: text('created_at').default(sql`(CURRENT_TIMESTAMP)`)
 	},
-	(t) => [unique('uniq_best_vote').on(t.userId, t.day, t.category)]
+	(t) => [unique('uniq_vote_once').on(t.userId, t.talkId)]
+);
+
+// Append-only audit log of every vote toggle. `conf_votes` only holds the
+// current picks (unvoting deletes the row), so this is the historical record —
+// e.g. to spot bursts of coordinated voting for one item. Never deleted from;
+// `at` is ms-epoch so near-simultaneous events sort and diff cleanly.
+export const confVoteEvents = sqliteTable(
+	'conf_vote_events',
+	{
+		id: integer('id').primaryKey({ autoIncrement: true }),
+		talkId: text('talk_id')
+			.notNull()
+			.references(() => confTalks.id, { onDelete: 'cascade' }),
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id, { onDelete: 'cascade' }),
+		action: text('action').notNull(), // 'vote' | 'unvote'
+		at: integer('at', { mode: 'timestamp_ms' })
+			.default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+			.notNull()
+	},
+	(t) => [index('vote_events_talk_idx').on(t.talkId), index('vote_events_user_idx').on(t.userId)]
 );
 
 /* ------------------------------------------------------------------ *

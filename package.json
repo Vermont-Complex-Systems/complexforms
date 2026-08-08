@@ -17,6 +17,7 @@
     "attendee": "node scripts/attendee.mjs",
     "reset-accounts": "node scripts/attendee.mjs wipe",
     "leaderboard": "node scripts/leaderboard.mjs",
+    "survey": "node scripts/survey.mjs",
     "test": "vitest run"
   },
   "devDependencies": {

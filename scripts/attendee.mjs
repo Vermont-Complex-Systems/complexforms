@@ -4,6 +4,9 @@
 // real attendees — running it locally only touches your own test data, since the
 // two ic2s2.db files never sync.
 //
+//   node scripts/attendee.mjs add    <email>   # put an email on the allow-list (on-site registration)
+//   node scripts/attendee.mjs grant  <email>   # make them an organizer (can see /ic2s2/stats)
+//   node scripts/attendee.mjs revoke <email>   # take organizer away again
 //   node scripts/attendee.mjs status <email>   # claim status for one attendee
 //   node scripts/attendee.mjs reset  <email>   # delete their login so they can re-claim
 //   node scripts/attendee.mjs claims           # list everyone who has claimed
@@ -45,7 +48,7 @@ function needEmail() {
 }
 
 function status(email) {
-	const att = db.prepare('SELECT claimed_at FROM attendees WHERE email = ?').get(email);
+	const att = db.prepare('SELECT claimed_at, role FROM attendees WHERE email = ?').get(email);
 	const usr = db.prepare('SELECT id, name, created_at FROM user WHERE email = ?').get(email);
 	const hasPw =
 		usr &&
@@ -55,9 +58,38 @@ function status(email) {
 	console.log(`DB           : ${DB}`);
 	console.log(`email        : ${email}`);
 	console.log(`on allow-list: ${att ? 'yes' : 'NO — not a registered attendee, cannot claim'}`);
+	console.log(`role         : ${att?.role ?? 'attendee'}`);
 	console.log(`claimed      : ${etTime(att?.claimed_at)}`);
 	console.log(`login account: ${usr ? `${usr.name} (created ${etTime(usr.created_at)})` : 'none'}`);
 	console.log(`password set : ${hasPw ? 'yes' : 'no'}`);
+}
+
+// On-site registration: allow-list one more email. Idempotent; the change is
+// live immediately (the list is checked at claim time, no restart needed).
+function add(email) {
+	if (!email.includes('@')) {
+		console.error(`"${email}" doesn't look like an email.`);
+		process.exit(1);
+	}
+	const r = db.prepare('INSERT OR IGNORE INTO attendees (email) VALUES (?)').run(email);
+	console.log(r.changes ? `Added ${email} to the allow-list.\n` : `${email} was already on the allow-list.\n`);
+	status(email);
+}
+
+// Organizer role = access to the hidden /ic2s2/stats dashboard. Checked live
+// on every request (admin.remote.ts), so grant/revoke need no restart. Grant
+// also allow-lists the email if it isn't registered yet.
+function grant(email) {
+	db.prepare('INSERT OR IGNORE INTO attendees (email) VALUES (?)').run(email);
+	db.prepare("UPDATE attendees SET role = 'organizer' WHERE email = ?").run(email);
+	console.log(`${email} is now an organizer — they can open /ic2s2/stats once logged in.\n`);
+	status(email);
+}
+
+function revoke(email) {
+	const r = db.prepare('UPDATE attendees SET role = NULL WHERE email = ?').run(email);
+	console.log(r.changes ? `Revoked organizer from ${email}.\n` : `${email} is not on the allow-list.\n`);
+	status(email);
 }
 
 function reset(email) {
@@ -112,6 +144,15 @@ function wipe() {
 }
 
 switch (cmd) {
+	case 'add':
+		add(needEmail());
+		break;
+	case 'grant':
+		grant(needEmail());
+		break;
+	case 'revoke':
+		revoke(needEmail());
+		break;
 	case 'status':
 		status(needEmail());
 		break;
@@ -125,7 +166,7 @@ switch (cmd) {
 		wipe();
 		break;
 	default:
-		console.error('Usage: node scripts/attendee.mjs <status|reset|claims|wipe> [email|--yes]');
+		console.error('Usage: node scripts/attendee.mjs <add|grant|revoke|status|reset|claims|wipe> [email|--yes]');
 		process.exit(1);
 }
 db.close();
