@@ -2,6 +2,7 @@
 	import type { SaveAnswer, SurveyOption } from './types';
 	import { createSaver } from './saver.svelte';
 	import SaveFeedback from './SaveFeedback.svelte';
+	import QuestionText from './QuestionText.svelte';
 
 	let {
 		question,
@@ -30,9 +31,7 @@
 </script>
 
 <div class="checkbox-question">
-	<div class="question-text">
-		<h3>{question}</h3>
-	</div>
+	<QuestionText {question} />
 	<div class="options">
 		{#each options as option (option.value)}
 			<label class="checkbox-option">
@@ -53,19 +52,6 @@
 <style>
 	.checkbox-question {
 		width: 100%;
-	}
-
-	.question-text {
-		text-align: center;
-		margin-bottom: 1rem;
-	}
-
-	.question-text h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.1rem;
-		font-weight: var(--vcsi-font-weight-semibold, 600);
-		color: var(--vcsi-survey-fg, var(--vcsi-fg, #333));
-		line-height: 1.4;
 	}
 
 	.options {
@@ -105,10 +91,6 @@
 	}
 
 	@media (max-width: 640px) {
-		.question-text h3 {
-			font-size: 1.3rem;
-		}
-
 		.checkbox-option {
 			padding: 0.6rem;
 		}

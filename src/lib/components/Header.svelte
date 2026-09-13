@@ -51,6 +51,9 @@
 		</div>
 
 		<div class="header-right">
+			<!-- Login is initiated per-story (each story links to /login?redirect=…),
+			     so there's no global "Log in" button. Signed-in users still get an
+			     avatar + log-out here so they can sign out from anywhere. -->
 			{#if user}
 				<a class="nav-avatar" href="{base}/account" title={user.name} aria-label="Account ({user.name})">
 					<Avatar.Root class="nav-avatar-root">
@@ -58,8 +61,6 @@
 					</Avatar.Root>
 				</a>
 				<button class="nav-auth" onclick={logout}>Log out</button>
-			{:else}
-				<a class="nav-auth" href="{base}/login">Log in</a>
 			{/if}
 
 			<a href="https://github.com/Vermont-Complex-Systems" target="_blank" rel="noopener noreferrer" class="github-button" aria-label="View on GitHub">

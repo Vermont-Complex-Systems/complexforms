@@ -2,6 +2,7 @@
 	import type { SaveAnswer, SurveyOption } from './types';
 	import { createSaver } from './saver.svelte';
 	import SaveFeedback from './SaveFeedback.svelte';
+	import QuestionText from './QuestionText.svelte';
 
 	let {
 		question,
@@ -23,9 +24,7 @@
 </script>
 
 <div class="select-question">
-	<div class="question-text">
-		<h3>{question}</h3>
-	</div>
+	<QuestionText {question} />
 
 	<!--
 	  Customizable <select> (Chromium 135+). The <button>/<selectedcontent>
@@ -61,18 +60,6 @@
 <style>
 	.select-question {
 		width: 100%;
-	}
-
-	.question-text {
-		text-align: center;
-		margin-bottom: 1rem;
-	}
-
-	.question-text h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.2rem;
-		font-weight: var(--vcsi-font-weight-semibold, 600);
-		color: var(--vcsi-survey-fg, var(--vcsi-fg, #333));
 	}
 
 	/*
@@ -174,12 +161,6 @@
 		.survey-select option .option-long {
 			font-size: 80%;
 			color: var(--vcsi-survey-muted, var(--vcsi-muted, #595959));
-		}
-	}
-
-	@media (max-width: 640px) {
-		.question-text h3 {
-			font-size: 1.3rem;
 		}
 	}
 </style>

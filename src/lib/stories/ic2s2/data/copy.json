@@ -1,0 +1,45 @@
+{
+	"title": "IC2S2",
+	"subtitle": "Vote for the talks you liked and hunt for objects around Burlington.",
+	"survey": [
+		{
+			"type": "select",
+			"value": {
+				"question": "Which is your favorite embedding space to navigate the poster/talk topic space? See [Program](https://ic2s2-2026.org/program/) > Talks & Posters > Embeddings.",
+				"name": "favEmbedding",
+				"options": [
+					{ "value": "qwen3_evoc", "label": "Qwen3-Embedding-0.6B / evoc" },
+					{ "value": "qwen3_umap", "label": "Qwen3-Embedding-0.6B / umap" },
+					{ "value": "all_minilm_l6_v2_evoc", "label": "all-MiniLM-L6-v2 / evoc" },
+					{ "value": "all_minilm_l6_v2_umap", "label": "all-MiniLM-L6-v2 / umap" },
+					{ "value": "embeddinggemma_300m_evoc", "label": "embeddinggemma-300m / evoc" },
+					{ "value": "embeddinggemma_300m_umap", "label": "embeddinggemma-300m / umap" },
+					{ "value": "nomic_embed_text_v1_evoc", "label": "nomic-embed-text-v1 / evoc" },
+					{ "value": "nomic_embed_text_v1_umap", "label": "nomic-embed-text-v1 / umap" },
+					{ "value": "specter2_evoc", "label": "specter2 / evoc" },
+					{ "value": "specter2_umap", "label": "specter2 / umap" },
+					{ "value": "none", "label": "None" }
+				]
+			}
+		},
+		{
+			"type": "text",
+			"value": {
+				"question": "Why? What makes it work for you?",
+				"name": "reason",
+				"placeholder": "Share your reasoning…"
+			}
+		},
+		{
+			"type": "radio",
+			"value": {
+				"question": "More generally, do you use embeddings in your work?",
+				"name": "doEmbedding",
+				"options": [
+					{ "value": "yes", "label": "Yes" },
+					{ "value": "no", "label": "No" }
+				]
+			}
+		}
+	]
+}
